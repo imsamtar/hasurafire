@@ -1,0 +1,30 @@
+{
+  "name": "hasurafire",
+  "version": "0.0.2",
+  "description": "A svelte components library for firebase-auth and hasura",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/imsamtar/hasurafire.git"
+  },
+  "keywords": [
+    "svelte",
+    "sapper",
+    "firebase",
+    "hasura",
+    "auth"
+  ],
+  "author": "SAMEER TARIQ",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/imsamtar/hasurafire/issues"
+  },
+  "homepage": "https://github.com/imsamtar/hasurafire#readme",
+  "dependencies": {
+    "@firebase/app": "^0.6.0",
+    "@firebase/auth": "^0.14.1"
+  }
+}
