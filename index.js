@@ -1,5 +1,31 @@
-import RootComponent from './Root.svelte';
-import UserComponent from './User.svelte';
+import Root from "./Root.svelte";
+import User from "./User.svelte";
+import * as auth from "./auth";
 
-export const Root = RootComponent;
-export const User = UserComponent;
+const {
+  default: firebase,
+  currentUser: user,
+  loginStatus,
+  signInWithGoogle,
+  signInWithGithub,
+  signInWithFacebook,
+  signInWithTwitter,
+  signInWithOAuth,
+  signInWithEmailAndPassword,
+  signOut
+} = auth;
+
+export {
+  Root,
+  User,
+  firebase,
+  user,
+  loginStatus,
+  signInWithGoogle,
+  signInWithGithub,
+  signInWithFacebook,
+  signInWithTwitter,
+  signInWithOAuth,
+  signInWithEmailAndPassword,
+  signOut
+};
