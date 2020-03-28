@@ -9,6 +9,8 @@ A svelte components library for firebase-auth and hasura
 npm i -D hasurafire
 ```
 
+### Example
+
 ```html
 <script>
   import { Root, User } from "hasurafire";
