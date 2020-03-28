@@ -1,6 +1,6 @@
 <script>
   import { onMount, createEventDispatcher } from "svelte";
-  import client from "../graphql";
+  import { subscribe } from "../graphql/actions";
 
   export let query;
   export let variables = {};
@@ -9,8 +9,7 @@
   let graphql, store, response;
 
   onMount(() => {
-    graphql = client();
-    store = graphql.subscribe({ query, variables });
+    store = subscribe(query, variables);
   });
 
   $: if (store && $store) {

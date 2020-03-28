@@ -3,6 +3,7 @@ import User from "./components/User.svelte";
 import Query from "./components/Query.svelte";
 import Subscribe from "./components/Subscribe.svelte";
 import Mutate from "./components/Mutate.svelte";
+import { query, subscribe, mutate } from "./graphql/actions";
 import * as auth from "./auth";
 
 const {
@@ -24,6 +25,9 @@ export {
   Query,
   Subscribe,
   Mutate,
+  query,
+  subscribe,
+  mutate,
   firebase,
   user,
   loginStatus,

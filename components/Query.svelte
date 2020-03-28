@@ -1,6 +1,6 @@
 <script>
   import { onMount, createEventDispatcher } from "svelte";
-  import client from "../graphql";
+  import { query as runQuery } from "../graphql/actions";
 
   export let query;
   export let variables = {};
@@ -9,8 +9,7 @@
   let graphql, promise;
 
   onMount(() => {
-    graphql = client();
-    promise = graphql.query({ query, variables });
+    promise = runQuery(query, variables);
     promise.then(data => {
       dispatch("response", data);
     });
