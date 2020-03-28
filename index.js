@@ -1,5 +1,8 @@
-import Root from "./Root.svelte";
-import User from "./User.svelte";
+import Root from "./components/Root.svelte";
+import User from "./components/User.svelte";
+import Query from "./components/Query.svelte";
+import Subscribe from "./components/Subscribe.svelte";
+import Mutate from "./components/Mutate.svelte";
 import * as auth from "./auth";
 
 const {
@@ -18,6 +21,9 @@ const {
 export {
   Root,
   User,
+  Query,
+  Subscribe,
+  Mutate,
   firebase,
   user,
   loginStatus,

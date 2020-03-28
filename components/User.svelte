@@ -1,20 +1,21 @@
 <script>
   import { onMount } from "svelte";
-  import firebase, { currentUser, loginStatus } from "./auth";
+  import firebase, { currentUser, loginStatus } from "../auth";
 
   let user, auth;
 
   onMount(() => {
-    $firebase.auth().onAuthStateChanged(user => {
+    $firebase.auth().onAuthStateChanged(async user => {
       if (user) {
+        localStorage.setItem("token", await user.getIdToken(true));
         $currentUser = user;
         $loginStatus = 1;
       } else {
         $currentUser = 0;
         $loginStatus = -1;
+        localStorage.removeItem("token");
       }
     });
-    user = "hello";
     auth = $firebase.auth();
   });
 
