@@ -3,24 +3,43 @@
   import { query as runQuery } from "../graphql/actions";
 
   export let query;
+  export let disableError = undefined;
   export let every = undefined;
   export let variables = {};
 
   const dispatch = createEventDispatcher();
-  let graphql, promise, response;
+  let graphql, promise, response, error;
+
+  const areEqual = (obj1, obj2) =>
+    JSON.stringify(obj1) === JSON.stringify(obj2);
 
   onMount(() => {
     promise = runQuery(query, variables);
-    promise.then(resp => {
-      response = resp;
-      dispatch("response", resp);
-    });
+    promise
+      .then(resp => {
+        response = resp;
+        dispatch("response", resp);
+      })
+      .catch(err => {
+        if (!error || !areEqual(error.message, err.message)) {
+          error = err;
+          dispatch("error", err);
+        }
+      });
     if (every) {
       setInterval(async () => {
-        let resp = await runQuery(query, variables);
-        if (JSON.stringify(response) !== JSON.stringify(resp)) {
-          response = resp;
-          dispatch("response", resp);
+        try {
+          let resp = await runQuery(query, variables);
+          if (resp && resp.data) error = undefined;
+          if (JSON.stringify(response) !== JSON.stringify(resp)) {
+            response = resp;
+            dispatch("response", resp);
+          }
+        } catch (err) {
+          if (!error || !areEqual(error.message, err.message)) {
+            error = err;
+            dispatch("error", err);
+          }
         }
       }, every * 1000);
     }
@@ -32,9 +51,13 @@
     {#await promise}
       <slot name="loading" />
     {:then resp}
-      <slot response={response || resp} />
-    {:catch error}
-      <slot name="error" {error} />
+      {#if !disableError && error}
+        <slot name="error" {error} />
+      {:else}
+        <slot response={response || resp} />
+      {/if}
+    {:catch err}
+      <slot name="error" error={error || err} />
     {/await}
   {:else}
     <slot name="loading" />
