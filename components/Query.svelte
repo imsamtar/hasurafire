@@ -11,9 +11,9 @@
 
   onMount(() => {
     promise = runQuery(query, variables);
-    promise.then(data => {
-      response = data;
-      dispatch("response", data);
+    promise.then(resp => {
+      response = resp;
+      dispatch("response", resp);
     });
     if (every) {
       setInterval(async () => {
