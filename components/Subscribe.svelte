@@ -14,7 +14,7 @@
 
   $: if (store && $store) {
     response = $store;
-    dispatch("update", $store);
+    dispatch("response", $store);
   }
 </script>
 
