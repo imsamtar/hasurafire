@@ -1,18 +1,31 @@
 import gql from "graphql-tag";
 import client from ".";
+import { queries } from "./store";
+
+function parseQuery(query) {
+  if (typeof query == "string") {
+    query &&
+      query.indexOf(" ") === -1 &&
+      query.indexOf("{") === -1 &&
+      queries.subscribe(queries => (query = queries[query] || query))();
+    return gql(query);
+  } else {
+    return query;
+  }
+}
 
 const query = (query, variables = {}) => {
-  if (typeof query == "string") query = gql(query);
+  query = parseQuery(query);
   return client.query(query, variables);
 };
 
 const subscribe = (query, variables = {}) => {
-  if (typeof query == "string") query = gql(query);
+  query = parseQuery(query);
   return client.subscribe(query, variables);
 };
 
 const mutate = (mutation, variables = {}) => {
-  if (typeof mutation == "string") mutation = gql(mutation);
+  mutation = parseQuery(mutation);
   return client.mutate(mutation, variables);
 };
 

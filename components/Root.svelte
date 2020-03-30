@@ -3,9 +3,10 @@
   import firebase from "@firebase/app";
   import "@firebase/auth";
   import firebaseStore from "../auth";
-  import { serverUri } from "../graphql/store";
+  import { serverUri, queries as queriesStore } from "../graphql/store";
 
   export let firebaseConfig, server;
+  export let queries = {};
 
   onMount(() => {
     if (firebase.apps.length === 0) {
@@ -13,6 +14,7 @@
     }
     $firebaseStore = firebase;
     $serverUri = server;
+    if (typeof queries == "object") $queriesStore = queries;
   });
 </script>
 
