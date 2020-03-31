@@ -1,6 +1,7 @@
 <script>
   import { onMount, createEventDispatcher } from "svelte";
   import { mutate } from "../graphql/actions";
+  import { user } from "..";
 
   export let mutation;
   export let disableError = undefined;
@@ -27,7 +28,8 @@
         }
       });
     if (every) {
-      setInterval(async () => {
+      const interval = setInterval(async () => {
+        if (!$user) return clearInterval(interval);
         try {
           let resp = await mutate(mutation, variables);
           if (resp && resp.data) error = undefined;

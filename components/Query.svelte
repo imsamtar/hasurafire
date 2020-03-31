@@ -1,6 +1,7 @@
 <script>
   import { onMount, createEventDispatcher } from "svelte";
   import { query as runQuery } from "../graphql/actions";
+  import { user } from "..";
 
   export let query;
   export let disableError = undefined;
@@ -27,7 +28,8 @@
         }
       });
     if (every) {
-      setInterval(async () => {
+      const interval = setInterval(async () => {
+        if (!$user) return clearInterval(interval);
         try {
           let resp = await runQuery(query, variables);
           if (resp && resp.data) error = undefined;
