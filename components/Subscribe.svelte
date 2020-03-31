@@ -1,25 +1,30 @@
 <script>
-  import { onMount, createEventDispatcher } from "svelte";
+  import { onMount, onDestroy, createEventDispatcher } from "svelte";
   import { subscribe } from "../graphql/actions";
+  import { currentUser } from "../auth";
 
   export let query;
   export let variables = {};
 
   const dispatch = createEventDispatcher();
-  let graphql, store, response;
+  let graphql, subscription, response;
 
   onMount(() => {
-    store = subscribe(query, variables);
+    subscription = subscribe(query, variables).subscribe(resp => {
+      if ($currentUser) {
+        response = resp;
+        dispatch("response", resp);
+      } else subscription.unsubscribe();
+    });
   });
 
-  $: if (store && $store) {
-    response = $store;
-    dispatch("response", $store);
-  }
+  onDestroy(() => {
+    subscription.unsubscribe();
+  });
 </script>
 
 {#if query}
-  {#if store && $store}
+  {#if response}
     <slot {response} />
   {:else}
     <slot name="loading" />
