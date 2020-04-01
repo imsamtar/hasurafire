@@ -7,19 +7,20 @@
   export let variables = {};
 
   const dispatch = createEventDispatcher();
-  let graphql, subscription, response;
+  let graphql, response;
 
   onMount(() => {
-    subscription = subscribe(query, variables).subscribe(resp => {
+    const { observable, disconnect } = subscribe(query, variables);
+    const sub = observable.subscribe(resp => {
       if ($currentUser) {
         response = resp;
         dispatch("response", resp);
-      } else subscription.unsubscribe();
+      } else sub.unsubscribe();
     });
-  });
-
-  onDestroy(() => {
-    subscription.unsubscribe();
+    return () => {
+      sub.unsubscribe();
+      disconnect();
+    };
   });
 </script>
 

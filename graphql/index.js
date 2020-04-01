@@ -26,13 +26,9 @@ const graphql = {
       cache: new InMemoryCache()
     });
   },
-  get client() {
+  get wsClient() {
     if (!graphql.serverUri || !graphql.token) return 0;
-    const httpLink = new HttpLink({
-      uri: graphql.serverUri,
-      headers: { Authorization: `Bearer ${graphql.token}` }
-    });
-    const wsLink = new WebSocketLink({
+    const link = new WebSocketLink({
       uri: `ws://${graphql.serverUri.split("//").splice(-1)[0]}`,
       options: {
         reconnect: true,
@@ -41,21 +37,15 @@ const graphql = {
         }
       }
     });
-    const link = split(
-      ({ query }) => {
-        const definition = getMainDefinition(query);
-        return (
-          definition.kind === "OperationDefinition" &&
-          definition.operation === "subscription"
-        );
-      },
-      wsLink,
-      httpLink
-    );
-    return new ApolloClient({
-      link,
-      cache: new InMemoryCache()
-    });
+    link.subscriptionClient.maxConnectTimeGenerator.duration = () =>
+      link.subscriptionClient.maxConnectTimeGenerator.max;
+    return [
+      new ApolloClient({
+        link,
+        cache: new InMemoryCache()
+      }),
+      () => link.subscriptionClient.close()
+    ];
   }
 };
 
@@ -64,7 +54,11 @@ export default {
     return graphql.httpClient.query({ query, variables });
   },
   subscribe(query, variables) {
-    return graphql.client.subscribe({ query, variables });
+    const client = graphql.wsClient;
+    return {
+      observable: client[0].subscribe({ query, variables }),
+      disconnect: client[1]
+    };
   },
   mutate(mutation, variables) {
     return graphql.httpClient.mutate({ mutation, variables });
