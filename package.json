@@ -23,7 +23,7 @@
     "url": "https://github.com/imsamtar/hasurafire/issues"
   },
   "homepage": "https://github.com/imsamtar/hasurafire#readme",
-  "devDependencies": {
+  "dependencies": {
     "@firebase/analytics": "^0.3.0",
     "@firebase/app": "^0.6.0",
     "@firebase/auth": "^0.14.1",
