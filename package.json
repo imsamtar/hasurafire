@@ -23,7 +23,7 @@
     "url": "https://github.com/imsamtar/hasurafire/issues"
   },
   "homepage": "https://github.com/imsamtar/hasurafire#readme",
-  "dependencies": {
+  "devDependencies": {
     "@firebase/app": "^0.6.0",
     "@firebase/auth": "^0.14.1",
     "apollo-cache-inmemory": "^1.6.5",
