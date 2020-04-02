@@ -1,5 +1,6 @@
 import Root from "./components/Root.svelte";
 import User from "./components/User.svelte";
+import SaveUser from "./components/SaveUser.svelte";
 import Query from "./components/Query.svelte";
 import Subscribe from "./components/Subscribe.svelte";
 import Mutate from "./components/Mutate.svelte";
@@ -22,6 +23,7 @@ const {
 export {
   Root,
   User,
+  SaveUser,
   Query,
   Subscribe,
   Mutate,

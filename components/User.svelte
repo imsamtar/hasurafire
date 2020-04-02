@@ -4,6 +4,7 @@
 
   const dispatch = createEventDispatcher();
   let user, auth;
+  let needToSave = false;
 
   onMount(() => {
     let firstTime = true;
@@ -12,7 +13,10 @@
         localStorage.setItem("token", await user.getIdToken(true));
         $currentUser = user;
         $loginStatus = 1;
-        if (!firstTime) dispatch("signin", user);
+        if (!firstTime) {
+          dispatch("signin", user);
+          needToSave = true;
+        }
         dispatch("in", user);
       } else {
         $currentUser = 0;
@@ -34,7 +38,7 @@
 
 {#if $firebase}
   {#if $loginStatus == 1}
-    <slot {user} {auth} />
+    <slot {user} {auth} {needToSave} />
   {:else if $loginStatus == -1}
     <slot name="signed-out" {auth} />
   {:else}
