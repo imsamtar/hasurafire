@@ -2,10 +2,17 @@
 
 A svelte components library for firebase-auth and hasura
 
-### Setup
+## Setup
 
 ```
 npm i -D hasurafire
+```
+
+### Edit *rollup.config.js*
+```javascript
+resolve({
+  mainFields: ['module', 'browser', 'main']
+}),
 ```
 
 ## Root
