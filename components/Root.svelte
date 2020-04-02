@@ -2,16 +2,24 @@
   import { onMount } from "svelte";
   import firebase from "@firebase/app";
   import "@firebase/auth";
+  import "@firebase/performance";
+  import "@firebase/analytics";
+  import { analytics as analyticsStore, performance } from "../firebase";
   import firebaseStore from "../auth";
   import { serverUri, queries as queriesStore } from "../graphql/store";
 
   export let firebaseConfig, server;
   export let queries = {};
+  export let analytics = false;
+  export let perf = false;
 
   onMount(() => {
     if (firebase.apps.length === 0) {
       firebase.initializeApp(firebaseConfig);
     }
+    window.firebase = firebase;
+    $analyticsStore = analytics && firebase.analytics();
+    $performance = perf && firebase.performance();
     $firebaseStore = firebase;
     $serverUri = server;
     if (typeof queries == "object") $queriesStore = queries;

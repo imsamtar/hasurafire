@@ -24,8 +24,10 @@
   },
   "homepage": "https://github.com/imsamtar/hasurafire#readme",
   "devDependencies": {
+    "@firebase/analytics": "^0.3.0",
     "@firebase/app": "^0.6.0",
     "@firebase/auth": "^0.14.1",
+    "@firebase/performance": "^0.2.36",
     "apollo-cache-inmemory": "^1.6.5",
     "apollo-client": "^2.6.8",
     "apollo-link": "^1.2.13",
