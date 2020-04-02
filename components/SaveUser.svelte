@@ -29,5 +29,5 @@
     <slot name="error" {error} />
   {/if}
 {:else}
-  <slot name="creating" />
+  <slot name="saving" />
 {/if}

@@ -42,6 +42,29 @@ npm i -D hasurafire
 </User>
 ```
 
+## SaveUser
+
+```html
+<script>
+  import { User, SaveUser } from "hasurafire";
+</script>
+
+<User let:user={{ email, displayName }} let:needToSave>
+  {#if needToSave}
+    <SaveUser mutation="insertUser" variables={{ email, name: displayName }} let:response on:error={signOut} >
+      <!-- Here you have access to response object [mutation response] -->
+      <!-- on:new is fired when user successfull saved -->
+      <!-- on:exists  is fired when user is already saved -->
+      <!-- on:error is fired when some problem occours -->
+      <h1>Saved successfull</h1>
+      <h1 slot="exists" let:error >User already exists</h1>
+      <h1 slot="error" let:error >Error {error.message}</h1>
+      <h1 slot="saving" >Saving user</h1>
+    </SaveUser>
+  {/if}
+</User>
+```
+
 ## Query
 
 ```html
