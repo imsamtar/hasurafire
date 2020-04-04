@@ -84,8 +84,9 @@ resolve({
   const variables = {};
 </script>
 
-<Query {query} {variables} let:response on:response on:error>
+<Query {query} {variables} let:execute let:response on:response on:error>
   <!-- prop: query, which accepts three types of input queryName|stringQuery|gqlTagQuery -->
+  <!-- Here you have access to execute function, calling this function will execute this query -->
   <!-- Here you have access to response object [graphql query response] -->
   <!-- on:response is fired when new response is recieved from query -->
   <!-- on:error  is fired when some error occurs while quering -->
@@ -106,8 +107,9 @@ resolve({
   const variables = {};
 </script>
 
-<Mutation {mutation} {variables} let:response on:response on:error>
+<Mutation {mutation} {variables} let:execute let:response on:response on:error>
   <!-- prop: mutation, which accepts three types of input mutationName|stringMutation|gqlTagMutation -->
+  <!-- Here you have access to execute function, calling this function will execute this mutation -->
   <!-- Here you have access to response object [graphql mutation response] -->
   <!-- on:response is fired when new response is recieved from mutation -->
   <!-- on:error  is fired when some error occurs while quering -->
