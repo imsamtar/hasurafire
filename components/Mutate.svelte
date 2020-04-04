@@ -10,7 +10,7 @@
   export let variables = {};
 
   const dispatch = createEventDispatcher();
-  let graphql, promise, response, error;
+  let graphql, response, error;
 
   const areEqual = (obj1, obj2) =>
     JSON.stringify(obj1) === JSON.stringify(obj2);
