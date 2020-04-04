@@ -24,7 +24,7 @@ resolve({
   const config = {
     firebaseConfig,
     server, // hasura server http address
-    queries // graphql queries, mutations and subscriptions
+    queries, // graphql queries, mutations and subscriptions
   };
 </script>
 
@@ -62,7 +62,7 @@ resolve({
 
 <User let:user={{ email, displayName }} let:needToSave>
   {#if needToSave}
-    <SaveUser mutation="insertUser" variables={{ email, name: displayName }} let:response on:error={signOut} >
+    <SaveUser {mutation} variables={{ email, name: displayName }} let:response on:error={signOut} >
       <!-- Here you have access to response object [mutation response] -->
       <!-- on:new is fired when user successfull saved -->
       <!-- on:exists  is fired when user is already saved -->
@@ -130,7 +130,7 @@ resolve({
   const variables = {};
 </script>
 
-<Subscribe query="subTodos" {variables} let:response on:response>
+<Subscribe {query} {variables} let:response on:response>
   <!-- prop: query, which accepts three types of input queryName|stringQuery|gqlTagQuery -->
   <!-- Here you have access to response object [graphql subscription response] -->
   <!-- on:response is fired when new response is recieved from subscription -->
@@ -144,73 +144,74 @@ resolve({
 
 ### query:
 
-  - Type: function
-  - Parameters:
-    - query
-    - variables (optional)
-  - Returns
-    - graphql query response
+- Type: function
+- Parameters:
+  - query
+  - variables (optional)
+- Returns
+  - graphql query response
 
 ### mutate:
 
-  - Type: function
-  - Parameters:
-    - mutatation
-    - variables (optional)
-  - Returns
-    - graphql mutatation response
+- Type: function
+- Parameters:
+  - mutatation
+  - variables (optional)
+- Returns
+  - graphql mutatation response
 
 ### subscribe:
 
-  - Type: function
-  - Parameters:
-    - query
-    - variables (optional)
-  - Returns
-    - object
-      - observable
-        - qraphql subscription observable
-      - disconnect
-        - function to disconnect this websocket connection
+- Type: function
+- Parameters:
+  - query
+  - variables (optional)
+- Returns
+  - object
+    - observable
+      - qraphql subscription observable
+    - disconnect
+      - function to disconnect this websocket connection
 
 ### firebase
 
-  - svelte store for firebase object
+- svelte store for firebase object
 
 ### user
 
-  - firebase current user
+- firebase current user
 
 ### loginStatus
 
-  - -1 if signed out
-  - 0 if not sure (loading)
-  - 1 if signed in
+- -1 if signed out
+- 0 if not sure (loading)
+- 1 if signed in
 
 ### signInWithGoogle
 
-  - call this function to signin with popup with google
+- call this function to signin with popup with google
 
 ### signInWithGithub
 
-  - call this function to signin with popup with github
+- call this function to signin with popup with github
 
 ### signInWithFacebook
 
-  - call this function to signin with popup with facebook
+- call this function to signin with popup with facebook
 
 ### signInWithTwitter
 
-  - call this function to signin with popup with twitter
+- call this function to signin with popup with twitter
 
 ### signInWithOAuth
 
-  - call this function to signin with popup with 0Auth
+- call this function to signin with popup with 0Auth
 
 ### signInWithEmailAndPassword
 
-  - call this function to signin with email and password
-  - accepts email and password as arguments
+- call this function to signin with email and password
+- accepts email and password as arguments
 
 ### signOut
-  - call this function to signout
+
+- call this function to signout
