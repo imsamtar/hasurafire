@@ -3,7 +3,7 @@ import User from "./components/User.svelte";
 import SaveUser from "./components/SaveUser.svelte";
 import Query from "./components/Query.svelte";
 import Subscribe from "./components/Subscribe.svelte";
-import Mutate from "./components/Mutate.svelte";
+import Mutation from "./components/Mutation.svelte";
 import { query, subscribe, mutate } from "./graphql/actions";
 import * as auth from "./auth";
 
@@ -26,7 +26,7 @@ export {
   SaveUser,
   Query,
   Subscribe,
-  Mutate,
+  Mutation,
   query,
   subscribe,
   mutate,
