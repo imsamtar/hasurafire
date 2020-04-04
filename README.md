@@ -140,7 +140,7 @@ resolve({
 
 ## Other things exported by hasurafire
 
-- ### query:
+### query:
 
   - Type: function
   - Parameters:
@@ -149,7 +149,7 @@ resolve({
   - Returns
     - graphql query response
 
-- ### mutate:
+### mutate:
 
   - Type: function
   - Parameters:
@@ -158,7 +158,7 @@ resolve({
   - Returns
     - graphql mutatation response
 
-- ### subscribe:
+### subscribe:
 
   - Type: function
   - Parameters:
@@ -171,44 +171,44 @@ resolve({
       - disconnect
         - function to disconnect this websocket connection
 
-- ### firebase
+### firebase
 
   - svelte store for firebase object
 
-- ### user
+### user
 
   - firebase current user
 
-- ### loginStatus
+### loginStatus
 
   - -1 if signed out
   - 0 if not sure (loading)
   - 1 if signed in
 
-- ### signInWithGoogle
+### signInWithGoogle
 
   - call this function to signin with popup with google
 
-- ### signInWithGithub
+### signInWithGithub
 
   - call this function to signin with popup with github
 
-- ### signInWithFacebook
+### signInWithFacebook
 
   - call this function to signin with popup with facebook
 
-- ### signInWithTwitter
+### signInWithTwitter
 
   - call this function to signin with popup with twitter
 
-- ### signInWithOAuth
+### signInWithOAuth
 
   - call this function to signin with popup with 0Auth
 
-- ### signInWithEmailAndPassword
+### signInWithEmailAndPassword
 
   - call this function to signin with email and password
   - accepts email and password as arguments
 
-- ### signOut
+### signOut
   - call this function to signout
