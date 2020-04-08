@@ -5,7 +5,7 @@
   import { onInterval } from "../utils";
 
   export let refreshTokenEvery = 1000;
-  
+
   const dispatch = createEventDispatcher();
   let user, auth;
   let needToSave = false;

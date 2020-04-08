@@ -5,6 +5,7 @@ import Query from "./components/Query.svelte";
 import Subscribe from "./components/Subscribe.svelte";
 import Mutation from "./components/Mutation.svelte";
 import { query, subscribe, mutate } from "./graphql/actions";
+import { accessToken } from "./stores";
 import * as auth from "./auth";
 
 const {
@@ -17,7 +18,7 @@ const {
   signInWithTwitter,
   signInWithOAuth,
   signInWithEmailAndPassword,
-  signOut
+  signOut,
 } = auth;
 
 export {
@@ -33,11 +34,12 @@ export {
   firebase,
   user,
   loginStatus,
+  accessToken,
   signInWithGoogle,
   signInWithGithub,
   signInWithFacebook,
   signInWithTwitter,
   signInWithOAuth,
   signInWithEmailAndPassword,
-  signOut
+  signOut,
 };

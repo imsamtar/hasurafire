@@ -8,7 +8,7 @@ export const currentUser = writable(0);
 
 export const signInWithGoogle = () => {
   let response;
-  const unsub = firebase.subscribe(firebase => {
+  const unsub = firebase.subscribe((firebase) => {
     const provider = new firebase.auth.GoogleAuthProvider();
     response = firebase.auth().signInWithPopup(provider);
   });
@@ -18,7 +18,7 @@ export const signInWithGoogle = () => {
 
 export const signInWithGithub = () => {
   let response;
-  const unsub = firebase.subscribe(firebase => {
+  const unsub = firebase.subscribe((firebase) => {
     const provider = new firebase.auth.GithubAuthProvider();
     response = firebase.auth().signInWithPopup(provider);
   });
@@ -28,7 +28,7 @@ export const signInWithGithub = () => {
 
 export const signInWithFacebook = () => {
   let response;
-  const unsub = firebase.subscribe(firebase => {
+  const unsub = firebase.subscribe((firebase) => {
     const provider = new firebase.auth.FacebookAuthProvider();
     response = firebase.auth().signInWithPopup(provider);
   });
@@ -38,7 +38,7 @@ export const signInWithFacebook = () => {
 
 export const signInWithTwitter = () => {
   let response;
-  const unsub = firebase.subscribe(firebase => {
+  const unsub = firebase.subscribe((firebase) => {
     const provider = new firebase.auth.TwitterAuthProvider();
     response = firebase.auth().signInWithPopup(provider);
   });
@@ -48,7 +48,7 @@ export const signInWithTwitter = () => {
 
 export const signInWithOAuth = () => {
   let response;
-  const unsub = firebase.subscribe(firebase => {
+  const unsub = firebase.subscribe((firebase) => {
     const provider = new firebase.auth.OAuthProvider();
     response = firebase.auth().signInWithPopup(provider);
   });
@@ -58,7 +58,7 @@ export const signInWithOAuth = () => {
 
 export const signInWithEmailAndPassword = (email, password) => {
   let response;
-  const unsub = firebase.subscribe(firebase => {
+  const unsub = firebase.subscribe((firebase) => {
     response = firebase.auth().signInWithEmailAndPassword(email, password);
   });
   unsub();
@@ -67,7 +67,7 @@ export const signInWithEmailAndPassword = (email, password) => {
 
 export const signOut = () => {
   let response;
-  const unsub = firebase.subscribe(firebase => {
+  const unsub = firebase.subscribe((firebase) => {
     response = firebase.auth().signOut();
   });
   unsub();
