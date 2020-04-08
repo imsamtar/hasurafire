@@ -7,7 +7,7 @@ function parseQuery(query) {
     query &&
       query.indexOf(" ") === -1 &&
       query.indexOf("{") === -1 &&
-      queries.subscribe(queries => (query = queries[query] || query))();
+      queries.subscribe((queries) => (query = queries[query] || query))();
     return gql(query);
   } else {
     return query;
