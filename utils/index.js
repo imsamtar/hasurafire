@@ -12,3 +12,9 @@ export function onInterval(callback, milliseconds, condition) {
     return clearInterval(interval);
   });
 }
+
+export function readStore(store) {
+  let temp;
+  store.subscribe((data) => (temp = data))();
+  return temp;
+}

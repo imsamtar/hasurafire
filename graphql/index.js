@@ -4,49 +4,43 @@ import { WebSocketLink } from "apollo-link-ws";
 import { getMainDefinition } from "apollo-utilities";
 import ApolloClient from "apollo-client";
 import { InMemoryCache } from "apollo-cache-inmemory";
-import { serverUri as server } from "./store";
+import { serverUri } from "./store";
+import { accessToken } from "../stores";
+import { readStore } from "../utils";
 
 const graphql = {
-  get serverUri() {
-    let serverUri;
-    server.subscribe(uri => (serverUri = uri))();
-    return serverUri;
-  },
-  get token() {
-    return localStorage.getItem("token");
-  },
   get httpClient() {
-    if (!graphql.serverUri || !graphql.token) return 0;
+    if (!readStore(serverUri) || !readStore(accessToken)) return 0;
     const link = new HttpLink({
-      uri: graphql.serverUri,
-      headers: { Authorization: `Bearer ${graphql.token}` }
+      uri: readStore(serverUri),
+      headers: { Authorization: `Bearer ${readStore(accessToken)}` },
     });
     return new ApolloClient({
       link,
-      cache: new InMemoryCache()
+      cache: new InMemoryCache(),
     });
   },
   get wsClient() {
-    if (!graphql.serverUri || !graphql.token) return 0;
+    if (!readStore(serverUri) || !readStore(accessToken)) return 0;
     const link = new WebSocketLink({
-      uri: `ws://${graphql.serverUri.split("//").splice(-1)[0]}`,
+      uri: `ws://${readStore(serverUri).split("//").splice(-1)[0]}`,
       options: {
         reconnect: true,
         connectionParams: {
-          headers: { Authorization: `Bearer ${graphql.token}` }
-        }
-      }
+          headers: { Authorization: `Bearer ${readStore(accessToken)}` },
+        },
+      },
     });
     link.subscriptionClient.maxConnectTimeGenerator.duration = () =>
       link.subscriptionClient.maxConnectTimeGenerator.max;
     return [
       new ApolloClient({
         link,
-        cache: new InMemoryCache()
+        cache: new InMemoryCache(),
       }),
-      () => link.subscriptionClient.close()
+      () => link.subscriptionClient.close(),
     ];
-  }
+  },
 };
 
 export default {
@@ -57,10 +51,10 @@ export default {
     const client = graphql.wsClient;
     return {
       observable: client[0].subscribe({ query, variables }),
-      disconnect: client[1]
+      disconnect: client[1],
     };
   },
   mutate(mutation, variables) {
     return graphql.httpClient.mutate({ mutation, variables });
-  }
+  },
 };

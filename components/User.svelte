@@ -1,17 +1,26 @@
 <script>
   import { onMount, createEventDispatcher } from "svelte";
   import firebase, { currentUser, loginStatus } from "../auth";
+  import { accessToken } from "../stores";
+  import { onInterval } from "../utils";
 
+  export let refreshTokenEvery = 1000;
+  
   const dispatch = createEventDispatcher();
   let user, auth;
   let needToSave = false;
 
   onMount(() => {
+    let interval;
     let firstTime = true;
     $firebase.auth().onAuthStateChanged(async user => {
       if (user) {
-        localStorage.setItem("token", await user.getIdToken(true));
+        $accessToken = await user.getIdToken(true);
         $currentUser = user;
+        interval = setInterval(
+          async () => ($accessToken = await user.getIdToken(true)),
+          refreshTokenEvery * 1000
+        );
         $loginStatus = 1;
         if (!firstTime) {
           dispatch("signin", user);
@@ -21,7 +30,8 @@
       } else {
         $currentUser = 0;
         $loginStatus = -1;
-        localStorage.removeItem("token");
+        clearInterval(interval);
+        $accessToken = "";
         if (!firstTime) dispatch("signout", user);
         dispatch("out", user);
       }
