@@ -187,6 +187,10 @@ resolve({
 - 0 if not sure (loading)
 - 1 if signed in
 
+### accessToken
+
+- JWT access token of currently signed-in user
+
 ### signInWithGoogle
 
 - call this function to signin with popup with google
