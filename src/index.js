@@ -1,45 +1,20 @@
-import Root from "./components/Root.svelte";
-import User from "./components/User.svelte";
-import SaveUser from "./components/SaveUser.svelte";
-import Query from "./components/Query.svelte";
-import Subscribe from "./components/Subscribe.svelte";
-import Mutation from "./components/Mutation.svelte";
-import { query, subscribe, mutate } from "./graphql/actions";
-import { accessToken } from "./stores";
-import * as auth from "./auth";
-
-const {
-  default: firebase,
-  currentUser: user,
-  loginStatus,
-  signInWithGoogle,
-  signInWithGithub,
-  signInWithFacebook,
-  signInWithTwitter,
-  signInWithOAuth,
-  signInWithEmailAndPassword,
-  signOut,
-} = auth;
-
+export { default as Root } from "./components/Root.svelte";
+export { default as User } from "./components/User.svelte";
+export { default as SaveUser } from "./components/SaveUser.svelte";
+export { default as Query } from "./components/Query.svelte";
+export { default as Subscribe } from "./components/Subscribe.svelte";
+export { default as Mutation } from "./components/Mutation.svelte";
+export { query, subscribe, mutate } from "./graphql/actions";
+export { accessToken } from "./stores";
 export {
-  Root,
-  User,
-  SaveUser,
-  Query,
-  Subscribe,
-  Mutation,
-  query,
-  subscribe,
-  mutate,
-  firebase,
-  user,
+  default as firebase,
+  currentUser as user,
   loginStatus,
-  accessToken,
   signInWithGoogle,
   signInWithGithub,
   signInWithFacebook,
   signInWithTwitter,
   signInWithOAuth,
   signInWithEmailAndPassword,
-  signOut,
-};
+  signOut
+} from "./auth";
