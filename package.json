@@ -2,7 +2,7 @@
   "name": "hasurafire",
   "version": "0.0.6",
   "description": "A svelte components library for firebase-auth and hasura",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
