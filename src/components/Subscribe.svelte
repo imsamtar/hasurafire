@@ -1,7 +1,7 @@
 <script>
   import { onMount, onDestroy, createEventDispatcher } from "svelte";
-  import { subscribe } from "../graphql/actions";
-  import { currentUser } from "../auth";
+  import { subscribe } from "../graphql";
+  import { currentUser } from "../store";
 
   export let query;
   export let variables = {};

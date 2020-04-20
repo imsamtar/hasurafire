@@ -1,7 +1,6 @@
 <script>
   import { onMount, createEventDispatcher } from "svelte";
-  import firebase, { currentUser, loginStatus } from "../auth";
-  import { accessToken } from "../stores";
+  import { firebase, currentUser, loginStatus, accessToken } from "../store";
   import { onInterval } from "../utils";
 
   export let refreshTokenEvery = 1000;

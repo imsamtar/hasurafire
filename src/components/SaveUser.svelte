@@ -1,6 +1,6 @@
 <script>
   import { onMount, createEventDispatcher } from "svelte";
-  import { mutate } from "../graphql/actions";
+  import { mutate } from "../graphql";
   export let mutation;
   export let variables = {};
 
