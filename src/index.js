@@ -4,12 +4,12 @@ export { default as SaveUser } from "./components/SaveUser.svelte";
 export { default as Query } from "./components/Query.svelte";
 export { default as Subscribe } from "./components/Subscribe.svelte";
 export { default as Mutation } from "./components/Mutation.svelte";
-export { query, subscribe, mutate } from "./graphql/actions";
-export { accessToken } from "./stores";
+export { query, subscribe, mutate } from "./graphql";
 export {
   default as firebase,
   currentUser as user,
   loginStatus,
+  accessToken,
   signInWithGoogle,
   signInWithGithub,
   signInWithFacebook,
@@ -17,4 +17,4 @@ export {
   signInWithOAuth,
   signInWithEmailAndPassword,
   signOut
-} from "./auth";
+} from "./store";

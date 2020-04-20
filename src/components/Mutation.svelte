@@ -1,8 +1,8 @@
 <script>
   import { onMount, createEventDispatcher } from "svelte";
-  import { mutate } from "../graphql/actions";
+  import { mutate } from "../graphql";
   import { onInterval } from "../utils";
-  import { currentUser } from "../auth";
+  import { currentUser } from "../store";
 
   export let mutation;
   export let every = false;

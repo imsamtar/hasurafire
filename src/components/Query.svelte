@@ -1,8 +1,8 @@
 <script>
   import { onMount, createEventDispatcher } from "svelte";
-  import { query as runQuery } from "../graphql/actions";
+  import { query as runQuery } from "../graphql";
   import { onInterval } from "../utils";
-  import { currentUser } from "../auth";
+  import { currentUser } from "../store";
 
   export let query;
   export let every = false;

@@ -4,9 +4,13 @@
   import "@firebase/auth";
   import "@firebase/performance";
   import "@firebase/analytics";
-  import { analytics as analyticsStore, performance } from "../firebase";
-  import firebaseStore from "../auth";
-  import { serverUri, queries as queriesStore } from "../graphql/store";
+  import {
+    firebase as firebaseStore,
+    analytics as analyticsStore,
+    performance,
+    queries as queriesStore,
+    serverUri
+  } from "../store";
 
   export let firebaseConfig, server;
   export let queries = {};
