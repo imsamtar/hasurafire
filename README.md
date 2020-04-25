@@ -49,7 +49,7 @@ resolve({
   <!-- on:out is fired when user is already signed in as well as when user signs out -->
   <!-- slot:default if user is signed in -->
   <!-- slot:signed-out if user is signed out -->
-  <!-- slot:loading if not sure signed in or not -->
+  <!-- slot:pending if not sure signed in or not -->
 </User>
 ```
 
@@ -95,7 +95,7 @@ resolve({
   <!-- optional prop: started, which accepts some boolean value (not used with every prop) to start quering on mount) -->
   <!-- slot:default if query successfull -->
   <!-- slot:error if some problem occours while quering -->
-  <!-- slot:loading while query is being executed -->
+  <!-- slot:pending while query is being executed -->
 </Query>
 ```
 
@@ -118,7 +118,7 @@ resolve({
   <!-- optional prop: started, which accepts some boolean value (not used with every prop) to start quering on mount) -->
   <!-- slot:default if mutation successfull -->
   <!-- slot:error if some problem occours while mutating -->
-  <!-- slot:loading while mutation is being executed -->
+  <!-- slot:pending while mutation is being executed -->
 </Mutation>
 ```
 
@@ -136,7 +136,7 @@ resolve({
   <!-- on:response is fired when new response is recieved from subscription -->
   <!-- optional prop: variables, which accepts an object containing all the variables needed for this graplql subscription -->
   <!-- slot:default if subscription successfull -->
-  <!-- slot:loading while subscribing -->
+  <!-- slot:pending while subscribing -->
 </Subscribe>
 ```
 
@@ -184,7 +184,7 @@ resolve({
 ### loginStatus
 
 - -1 if signed out
-- 0 if not sure (loading)
+- 0 if not sure (pending)
 - 1 if signed in
 
 ### accessToken

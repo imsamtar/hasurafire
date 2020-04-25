@@ -1,6 +1,6 @@
 {
   "name": "hasurafire",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "A svelte components library for firebase-auth and hasura",
   "main": "src/index.js",
   "scripts": {
@@ -26,16 +26,13 @@
   "dependencies": {
     "@firebase/analytics": "^0.3.0",
     "@firebase/app": "^0.6.0",
-    "@firebase/auth": "^0.14.1",
+    "@firebase/auth": "^0.14.4",
     "@firebase/performance": "^0.2.36",
     "apollo-cache-inmemory": "^1.6.5",
     "apollo-client": "^2.6.8",
-    "apollo-link": "^1.2.13",
-    "apollo-link-error": "^1.1.12",
     "apollo-link-http": "^1.5.16",
     "apollo-link-ws": "^1.0.19",
-    "apollo-utilities": "^1.3.3",
-    "graphql": "^14.6.0",
+    "graphql": "^15.0.0",
     "graphql-tag": "^2.10.3",
     "subscriptions-transport-ws": "^0.9.16"
   }
