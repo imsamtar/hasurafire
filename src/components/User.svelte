@@ -51,7 +51,7 @@
   {:else if $loginStatus == -1}
     <slot name="signed-out" {auth} />
   {:else}
-    <slot name="loading" {auth} />
+    <slot name="pending" {auth} />
   {/if}
 {:else}
   You must use

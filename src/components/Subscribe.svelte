@@ -28,7 +28,7 @@
   {#if response}
     <slot {response} />
   {:else}
-    <slot name="loading" />
+    <slot name="pending" />
   {/if}
 {:else}
   You must pass

@@ -29,5 +29,5 @@
     <slot name="error" {error} />
   {/if}
 {:else}
-  <slot name="saving" />
+  <slot name="pending" />
 {/if}

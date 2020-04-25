@@ -41,7 +41,7 @@
   {:else if response}
     <slot {response} {error} {execute} />
   {:else}
-    <slot name="loading" />
+    <slot name="pending" />
   {/if}
 {:else}
   You must pass
