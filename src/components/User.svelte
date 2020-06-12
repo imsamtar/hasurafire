@@ -53,6 +53,7 @@
   {:else}
     <slot name="pending" {auth} />
   {/if}
+  <slot name="*" />
 {:else}
   You must use
   <code>Root</code>

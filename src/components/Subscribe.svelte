@@ -30,6 +30,7 @@
   {:else}
     <slot name="pending" />
   {/if}
+  <slot name="*" />
 {:else}
   You must pass
   <code>query</code>

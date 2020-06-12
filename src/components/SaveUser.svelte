@@ -31,3 +31,4 @@
 {:else}
   <slot name="pending" />
 {/if}
+<slot name="*" />
