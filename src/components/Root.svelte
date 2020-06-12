@@ -16,6 +16,7 @@
   export let queries = {};
   export let analytics = false;
   export let perf = false;
+  export let schema = "";
 
   onMount(() => {
     if (firebase.apps.length === 0) {
@@ -26,7 +27,13 @@
     $performance = perf && firebase.performance();
     $firebaseStore = firebase;
     $serverUri = server;
-    if (typeof queries == "object") $queriesStore = queries;
+    if (typeof queries == "object") {
+      for (const key in queries)
+        if (typeof queries[key] === "string")
+          if (schema) queries[key] = queries[key].replace(/%s/g, schema);
+          else queries[key] = queries[key].replace(/%s_?/g, "");
+      $queriesStore = queries;
+    }
   });
 </script>
 
