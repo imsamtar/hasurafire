@@ -8,7 +8,7 @@ A svelte components library for firebase-auth and hasura
 npm i -D hasurafire
 ```
 
-### Edit _rollup.config.js_
+### Might need to edit _rollup.config.js_ (only if using rollup template)
 
 ```javascript
 resolve({
