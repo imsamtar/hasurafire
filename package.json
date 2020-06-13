@@ -1,6 +1,6 @@
 {
   "name": "hasurafire",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "A svelte components library for firebase-auth and hasura",
   "main": "src/index.js",
   "scripts": {
