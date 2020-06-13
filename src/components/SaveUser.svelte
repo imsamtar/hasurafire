@@ -3,13 +3,18 @@
   import { mutate } from "../graphql";
   export let mutation;
   export let variables = {};
+  export let role = "";
+  export let headers = {};
+  export let noauth = undefined;
+  export let adminsecret = undefined;
 
   const dispatch = createEventDispatcher();
   let response, exists, error;
 
   onMount(async () => {
     try {
-      response = await mutate(mutation, variables);
+      const options = { role, headers, noauth, adminsecret };
+      response = await mutate(mutation, variables, options);
       dispatch("new", response);
     } catch (err) {
       let exists = err.message.indexOf("niqueness") > -1;

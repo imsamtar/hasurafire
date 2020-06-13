@@ -13,6 +13,12 @@ function parseQuery(query) {
   return query;
 }
 
-export const query = (query, variables = {}) => client.query(parseQuery(query), variables);
-export const subscribe = (query, variables = {}) => client.subscribe(parseQuery(query), variables);
-export const mutate = (mutation, variables = {}) => client.mutate(parseQuery(mutation), variables);
+export const query = (query, variables = {}, options = {}) => {
+  return client.query(parseQuery(query), variables, options)
+};
+export const subscribe = (query, variables = {}, options = {}) => {
+  return client.subscribe(parseQuery(query), variables, options)
+};
+export const mutate = (mutation, variables = {}, options = {}) => {
+  return client.mutate(parseQuery(mutation), variables, options)
+};

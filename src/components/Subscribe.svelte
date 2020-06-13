@@ -5,12 +5,17 @@
 
   export let query;
   export let variables = {};
+  export let role = "";
+  export let headers = {};
+  export let noauth = undefined;
+  export let adminsecret = undefined;
 
   const dispatch = createEventDispatcher();
   let graphql, response;
 
   onMount(() => {
-    const { observable, disconnect } = subscribe(query, variables);
+    const options = { role, headers, noauth, adminsecret };
+    const { observable, disconnect } = subscribe(query, variables, options);
     const sub = observable.subscribe(resp => {
       if ($currentUser) {
         response = resp;

@@ -8,6 +8,10 @@
   export let every = false;
   export let started = !!every;
   export let variables = {};
+  export let role = "";
+  export let headers = {};
+  export let noauth = undefined;
+  export let adminsecret = undefined;
 
   const dispatch = createEventDispatcher();
   let graphql, response, error;
@@ -17,7 +21,8 @@
 
   const execute = async () => {
     try {
-      let resp = await mutate(mutation, variables);
+      const options = { role, headers, noauth, adminsecret };
+      let resp = await mutate(mutation, variables, options);
       if (resp && resp.data) error = undefined;
       if (!areEqual(response, resp)) {
         response = resp;
