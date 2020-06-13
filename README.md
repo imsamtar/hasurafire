@@ -24,7 +24,18 @@ resolve({
   const config = {
     firebaseConfig,
     server, // hasura server http address
-    queries, // graphql queries, mutations and subscriptions
+    schema: 'v1', // %s in queries, mutations and subscriptions will be replaced by this value
+    queries: {
+      getMessages: `
+        query get_messages {
+          %s_messages {
+            content
+            sender_id
+            chat_id
+          }
+        }
+      `
+    }, // graphql queries, mutations and subscriptions
   };
 </script>
 
@@ -50,6 +61,7 @@ resolve({
   <!-- slot:default if user is signed in -->
   <!-- slot:signed-out if user is signed out -->
   <!-- slot:pending if not sure signed in or not -->
+  <!-- slot:* which is rendered all the time-->
 </User>
 ```
 
@@ -70,7 +82,8 @@ resolve({
       <!-- slot:default if saved successfully -->
       <!-- slot:exists if user already saved -->
       <!-- slot:error if some problem occours saving -->
-      <!-- slot:saving while user is being saved -->
+      <!-- slot:pending while user is being saved --> 
+      <!-- slot:* which is rendered all the time-->
     </SaveUser>
   {/if}
 </User>
@@ -96,6 +109,7 @@ resolve({
   <!-- slot:default if query successfull -->
   <!-- slot:error if some problem occours while quering -->
   <!-- slot:pending while query is being executed -->
+  <!-- slot:* which is rendered all the time-->
 </Query>
 ```
 
@@ -119,6 +133,7 @@ resolve({
   <!-- slot:default if mutation successfull -->
   <!-- slot:error if some problem occours while mutating -->
   <!-- slot:pending while mutation is being executed -->
+  <!-- slot:* which is rendered all the time-->
 </Mutation>
 ```
 
@@ -137,6 +152,7 @@ resolve({
   <!-- optional prop: variables, which accepts an object containing all the variables needed for this graplql subscription -->
   <!-- slot:default if subscription successfull -->
   <!-- slot:pending while subscribing -->
+  <!-- slot:* which is rendered all the time-->
 </Subscribe>
 ```
 
