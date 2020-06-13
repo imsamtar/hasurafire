@@ -79,6 +79,10 @@ resolve({
       <!-- on:new is fired when user successfull saved -->
       <!-- on:exists  is fired when user is already saved -->
       <!-- on:error is fired when some problem occours -->
+      <!-- optional prop: role, save user while using a specific role -->
+      <!-- optional prop: headers, save user while passing custom request headers to hasura -->
+      <!-- optional prop: noauth, save user without authentication -->
+      <!-- optional prop: adminsecret, save user using admin secret insead of firebase auth -->
       <!-- slot:default if saved successfully -->
       <!-- slot:exists if user already saved -->
       <!-- slot:error if some problem occours saving -->
@@ -106,6 +110,10 @@ resolve({
   <!-- optional prop: variables, which accepts an object containing all the variables needed for this graplql query -->
   <!-- optional prop: every, which accepts some number in seconds after which re-execute this query -->
   <!-- optional prop: started, which accepts some boolean value (not used with every prop) to start quering on mount) -->
+  <!-- optional prop: role, do this query hasura using a specific role -->
+  <!-- optional prop: headers, do this query while passing custom request headers to hasura -->
+  <!-- optional prop: noauth, do this query without authentication -->
+  <!-- optional prop: adminsecret, do this query using admin secret insead of firebase auth -->
   <!-- slot:default if query successfull -->
   <!-- slot:error if some problem occours while quering -->
   <!-- slot:pending while query is being executed -->
@@ -130,6 +138,10 @@ resolve({
   <!-- optional prop: variables, which accepts an object containing all the variables needed for this graplql mutation -->
   <!-- optional prop: every, which accepts some number in seconds after which re-execute this mutation -->
   <!-- optional prop: started, which accepts some boolean value (not used with every prop) to start quering on mount) -->
+  <!-- optional prop: role, do this mutation hasura using a specific role -->
+  <!-- optional prop: headers, do this mutation while passing custom request headers to hasura -->
+  <!-- optional prop: noauth, do this mutation without authentication -->
+  <!-- optional prop: adminsecret, do this mutation using admin secret insead of firebase auth -->
   <!-- slot:default if mutation successfull -->
   <!-- slot:error if some problem occours while mutating -->
   <!-- slot:pending while mutation is being executed -->
@@ -150,6 +162,10 @@ resolve({
   <!-- Here you have access to response object [graphql subscription response] -->
   <!-- on:response is fired when new response is recieved from subscription -->
   <!-- optional prop: variables, which accepts an object containing all the variables needed for this graplql subscription -->
+  <!-- optional prop: role, do this query hasura using a specific role -->
+  <!-- optional prop: headers, do this query while passing custom request headers to hasura -->
+  <!-- optional prop: noauth, do this query without authentication -->
+  <!-- optional prop: adminsecret, do this query using admin secret insead of firebase auth -->
   <!-- slot:default if subscription successfull -->
   <!-- slot:pending while subscribing -->
   <!-- slot:* which is rendered all the time-->
@@ -164,6 +180,7 @@ resolve({
 - Parameters:
   - query
   - variables (optional)
+  - options (optional) e.g. {role, headers, noauth, adminsecret}
 - Returns
   - graphql query response
 
@@ -173,6 +190,7 @@ resolve({
 - Parameters:
   - mutatation
   - variables (optional)
+  - options (optional) e.g. {role, headers, noauth, adminsecret}
 - Returns
   - graphql mutatation response
 
@@ -182,6 +200,7 @@ resolve({
 - Parameters:
   - query
   - variables (optional)
+  - options (optional) e.g. {role, headers, noauth, adminsecret}
 - Returns
   - object
     - observable
