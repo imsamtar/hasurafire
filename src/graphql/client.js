@@ -2,18 +2,18 @@ import { HttpLink } from "apollo-link-http";
 import { WebSocketLink } from "apollo-link-ws";
 import ApolloClient from "apollo-client";
 import { InMemoryCache } from "apollo-cache-inmemory";
-import { serverUri, accessToken } from "../store";
+import { hasuraEndpoint, accessToken } from "../store";
 import { readStore } from "../utils";
 
 function shouldStop(headers = {}) {
-  return (!readStore(serverUri) || !readStore(accessToken)) && headers['Authorization'];
+  return (!readStore(hasuraEndpoint) || !readStore(accessToken)) && headers['Authorization'];
 }
 
 const graphql = {
   httpClient(headers = {}) {
     if (shouldStop(headers)) return 0;
     const link = new HttpLink({
-      uri: readStore(serverUri),
+      uri: readStore(hasuraEndpoint),
       headers
     });
     return new ApolloClient({
@@ -24,7 +24,7 @@ const graphql = {
   wsClient(headers = {}) {
     if (shouldStop(headers)) return 0;
     const link = new WebSocketLink({
-      uri: `ws://${readStore(serverUri).split("//").splice(-1)[0]}`,
+      uri: `ws://${readStore(hasuraEndpoint).split("//").splice(-1)[0]}`,
       options: {
         reconnect: true,
         connectionParams: {

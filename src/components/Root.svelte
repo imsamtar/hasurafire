@@ -9,10 +9,10 @@
     analytics as analyticsStore,
     performance,
     queries as queriesStore,
-    serverUri
+    hasuraEndpoint
   } from "../store";
 
-  export let firebaseConfig, server;
+  export let firebaseConfig, endpoint;
   export let queries = {};
   export let analytics = false;
   export let perf = false;
@@ -20,7 +20,7 @@
 
   setContext("__root", true);
   onMount(() => {
-    if (!firebaseConfig || !server) return;
+    if (!firebaseConfig || !endpoint) return;
     if (firebase.apps.length === 0) {
       firebase.initializeApp(firebaseConfig);
     }
@@ -28,7 +28,7 @@
     $analyticsStore = analytics && firebase.analytics();
     $performance = perf && firebase.performance();
     $firebaseStore = firebase;
-    $serverUri = server;
+    $hasuraEndpoint = endpoint;
     if (typeof queries == "object") {
       for (const key in queries)
         if (typeof queries[key] === "string")
@@ -39,16 +39,18 @@
   });
 </script>
 
-{#if $firebaseStore && server}
+{#if $firebaseStore && endpoint}
   <slot {firebase} />
 {:else if !firebaseConfig}
   <p>
-    Pass firebase configuration as a prop
-    <em>config</em>
+    Prop
+    <code>firebaseConfig</code>
+    is required.
   </p>
-{:else if !server}
+{:else if !endpoint}
   <p>
-    Pass hasura server URI as a prop
-    <em>server</em>
+    Prop
+    <code>endpoint</code>
+    is required.
   </p>
 {/if}

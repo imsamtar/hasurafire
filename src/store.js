@@ -7,7 +7,7 @@ export const performance = writable(0);
 export const loginStatus = writable(0); // -1 = Signed Out, 0 = Loading, 1 = Signed In
 export const currentUser = writable(0);
 export const accessToken = writable("");
-export const serverUri = writable("");
+export const hasuraEndpoint = writable("");
 export const queries = writable({});
 export default firebase;
 
