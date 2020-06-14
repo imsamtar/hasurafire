@@ -63,9 +63,11 @@ resolve({
   <!-- let:user current firebase user -->
   <!-- let:auth firebase.auth() -->
   <!-- let:fresh_signin just signed in -->
+  <!-- let:signout signout function -->
   <!-- bind:user current firebase user -->
   <!-- bind:auth firebase.auth() -->
   <!-- bind:fresh_signin just signed in -->
+  <!-- bind:signout signout function -->
   <!-- on:signin is fired when user signs in -->
   <!-- on:signout  is fired when user signs out -->
   <!-- on:in is fired when user is already signed in as well as when user signs in -->
@@ -84,9 +86,9 @@ resolve({
   import { User, SaveUser } from "hasurafire";
 </script>
 
-<User let:user={{ email }} let:fresh_start>
-  {#if fresh_start}
-    <SaveUser {mutation} variables={{ email }} on:error={signOut} >
+<User let:user={{ email }} let:fresh_signin let:signout>
+  {#if fresh_signin}
+    <SaveUser {mutation} variables={{ email }} on:error={signout} >
       <!-- Here you have access to response object [mutation response] -->
       <!-- let:response response of mutation -->
       <!-- let:data response.data object -->
@@ -287,6 +289,6 @@ resolve({
 - call this function to signin with email and password
 - accepts email and password as arguments
 
-### signOut
+### signout
 
 - call this function to signout
