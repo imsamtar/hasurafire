@@ -1,5 +1,6 @@
 <script>
-  import { onMount, setContext, createEventDispatcher } from "svelte";
+  import { onMount, createEventDispatcher } from "svelte";
+  import { setContext, getContext } from "svelte";
   import { firebase, currentUser, loginStatus, accessToken } from "../store";
   import { onInterval } from "../utils";
 
@@ -10,8 +11,11 @@
   export let auth = undefined;
   export let fresh_signin = false;
 
+  let child_of_root = getContext("__root");
+
   setContext("__user", true);
   onMount(() => {
+    if (!child_of_root) return;
     let interval;
     let firstTime = true;
     $firebase.auth().onAuthStateChanged(async user => {
@@ -41,13 +45,13 @@
     auth = $firebase.auth();
   });
 
-  $: if (typeof window == "object") {
+  $: if (typeof window == "object" && child_of_root) {
     user = $currentUser;
     auth = $firebase.auth();
   }
 </script>
 
-{#if $firebase}
+{#if child_of_root}
   {#if $loginStatus == 1}
     <slot {user} {auth} {fresh_signin} />
   {:else if $loginStatus == -1}
@@ -57,7 +61,9 @@
   {/if}
   <slot name="*" />
 {:else}
-  You must use
-  <code>Root</code>
-  component...
+  <p>
+    This component must be a child of
+    <code>Root</code>
+    component.
+  </p>
 {/if}

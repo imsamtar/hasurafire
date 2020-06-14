@@ -1,5 +1,5 @@
 <script>
-  import { onMount } from "svelte";
+  import { onMount, setContext } from "svelte";
   import firebase from "@firebase/app";
   import "@firebase/auth";
   import "@firebase/performance";
@@ -18,7 +18,9 @@
   export let perf = false;
   export let schema = "";
 
+  setContext("__root", true);
   onMount(() => {
+    if (!firebaseConfig || !server) return;
     if (firebase.apps.length === 0) {
       firebase.initializeApp(firebaseConfig);
     }

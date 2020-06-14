@@ -16,8 +16,10 @@
 
   const dispatch = createEventDispatcher();
   let already_exists;
+  let child_of_root = getContext("__root");
 
   onMount(async () => {
+    if (!child_of_root || !mutation) return;
     try {
       const options = { role, headers, noauth, adminsecret };
       response = await mutate(mutation, variables, options);
@@ -31,15 +33,23 @@
   });
 </script>
 
-{#if response}
-  <slot {response} {data} />
-{:else if error}
-  {#if already_exists}
-    <slot name="already_exists" {error} />
+{#if child_of_root}
+  {#if response}
+    <slot {response} {data} />
+  {:else if error}
+    {#if already_exists}
+      <slot name="already_exists" {error} />
+    {:else}
+      <slot name="error" {error} />
+    {/if}
   {:else}
-    <slot name="error" {error} />
+    <slot name="pending" />
   {/if}
+  <slot name="*" />
 {:else}
-  <slot name="pending" />
+  <p>
+    This component must be a child of
+    <code>Root</code>
+    component.
+  </p>
 {/if}
-<slot name="*" />

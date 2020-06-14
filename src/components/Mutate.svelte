@@ -21,11 +21,13 @@
 
   const dispatch = createEventDispatcher();
   let graphql;
+  let child_of_root = getContext("__root");
 
   const areEqual = (obj1, obj2) =>
     JSON.stringify(obj1) === JSON.stringify(obj2);
 
   const execute = async () => {
+    if (!child_of_root || !mutation) return;
     try {
       const options = { role, headers, noauth, adminsecret };
       let resp = await mutate(mutation, variables, options);
@@ -47,17 +49,27 @@
     onInterval(execute, every * 1000, noauth || adminsecret || currentUser);
 </script>
 
-{#if mutation}
-  {#if error}
-    <slot name="error" {error} />
-  {:else if response}
-    <slot {response} {data} {error} {execute} />
+{#if child_of_root}
+  {#if mutation}
+    {#if error}
+      <slot name="error" {error} />
+    {:else if response}
+      <slot {response} {data} {error} {execute} />
+    {:else}
+      <slot name="pending" />
+    {/if}
+    <slot name="*" />
   {:else}
-    <slot name="pending" />
+    <p>
+      Prop
+      <code>mutation</code>
+      is required.
+    </p>
   {/if}
-  <slot name="*" />
 {:else}
-  You must pass
-  <code>mutation</code>
-  prop...
+  <p>
+    This component must be a child of
+    <code>Root</code>
+    component.
+  </p>
 {/if}

@@ -8,7 +8,7 @@
   export let variables = {};
   export let role = "";
   export let headers = {};
-  export let noauth = !getContext('__user');
+  export let noauth = !getContext("__user");
   export let adminsecret = undefined;
   export let response = undefined;
   export let data = undefined;
@@ -19,8 +19,10 @@
 
   const dispatch = createEventDispatcher();
   let graphql;
+  let child_of_root = getContext("__root");
 
   onMount(() => {
+    if (!child_of_root || !query) return;
     const options = { role, headers, noauth, adminsecret };
     const { observable, client } = subscribe(query, variables, options);
     const sub = observable.subscribe(
@@ -43,17 +45,27 @@
   });
 </script>
 
-{#if query}
-  {#if error}
-    <slot name="error" {error} />
-  {:else if response}
-    <slot {response} {data} {error} />
+{#if child_of_root}
+  {#if query}
+    {#if error}
+      <slot name="error" {error} />
+    {:else if response}
+      <slot {response} {data} {error} />
+    {:else}
+      <slot name="pending" />
+    {/if}
+    <slot name="*" />
   {:else}
-    <slot name="pending" />
+    <p>
+      Prop
+      <code>query</code>
+      is required.
+    </p>
   {/if}
-  <slot name="*" />
 {:else}
-  You must pass
-  <code>query</code>
-  prop...
+  <p>
+    This component must be a child of
+    <code>Root</code>
+    component.
+  </p>
 {/if}
