@@ -14,6 +14,7 @@
   export let adminsecret = undefined;
   export let response = undefined;
   export let data = undefined;
+  export let execute = undefined;
   export let error = undefined;
   error = undefined;
   response = undefined;
@@ -26,7 +27,7 @@
   const areEqual = (obj1, obj2) =>
     JSON.stringify(obj1) === JSON.stringify(obj2);
 
-  const execute = async () => {
+  execute = async () => {
     if (!child_of_root || !query) return;
     try {
       const options = { role, headers, noauth, adminsecret };
