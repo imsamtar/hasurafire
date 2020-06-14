@@ -218,7 +218,7 @@ resolve({
 - Parameters:
   - query
   - variables (optional)
-  - options (optional) e.g. {role, headers, noauth, adminsecret}
+  - options (optional) e.g. { role, headers, noauth, adminsecret }
 - Returns
   - graphql query response
 
@@ -228,7 +228,7 @@ resolve({
 - Parameters:
   - mutatation
   - variables (optional)
-  - options (optional) e.g. {role, headers, noauth, adminsecret}
+  - options (optional) e.g. { role, headers, noauth, adminsecret }
 - Returns
   - graphql mutatation response
 
@@ -238,13 +238,13 @@ resolve({
 - Parameters:
   - query
   - variables (optional)
-  - options (optional) e.g. {role, headers, noauth, adminsecret}
+  - options (optional) e.g. { role, headers, noauth, adminsecret }
 - Returns
   - object
     - observable
       - qraphql subscription observable
-    - disconnect
-      - function to disconnect this websocket connection
+    - client
+      - client.close() function to disconnect this websocket connection
 
 ### firebase
 
