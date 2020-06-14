@@ -23,7 +23,7 @@ resolve({
   import { Root } from "hasurafire";
   const config = {
     firebaseConfig,
-    server, // hasura server http address
+    endpoint, // hasura graphql endpoint
     schema: 'v1', // %s in queries, mutations and subscriptions will be replaced by this value
     queries: {
       getMessages: `
@@ -41,6 +41,12 @@ resolve({
 
 <Root {...config} let:firebase>
   <!-- Here you have access to firebase object -->
+  <!-- prop: firebaseConfig -->
+  <!-- prop: endpoint, hasura graphql endpoint -->
+  <!-- optional prop: queries, object with all queries, mutations and subscriptions -->
+  <!-- optional prop: analytics, firebase analytics -->
+  <!-- optional prop: perf, firebase performence -->
+  <!-- optional prop: schema, value which will replace %s in queries with itself -->
 </Root>
 ```
 

@@ -14,9 +14,9 @@
 
   export let firebaseConfig, endpoint;
   export let queries = {};
+  export let schema = "";
   export let analytics = false;
   export let perf = false;
-  export let schema = "";
 
   setContext("__root", true);
   onMount(() => {
