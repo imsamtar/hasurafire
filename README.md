@@ -57,15 +57,15 @@ resolve({
   import { User } from "hasurafire";
 </script>
 
-<User (let|bind):user (let|bind):auth (let|bind):fresh_start on:signin on:signout on:in on:out>
+<User (let|bind):user (let|bind):auth (let|bind):fresh_signin on:signin on:signout on:in on:out>
   <!-- Here you have access to user object [current firebase user] -->
   <!-- Here you have access to auth object [firebase.auth()] -->
   <!-- let:user current firebase user -->
   <!-- let:auth firebase.auth() -->
-  <!-- let:fresh_start current firebase user -->
+  <!-- let:fresh_signin just signed in -->
   <!-- bind:user current firebase user -->
   <!-- bind:auth firebase.auth() -->
-  <!-- bind:fresh_start current firebase user -->
+  <!-- bind:fresh_signin just signed in -->
   <!-- on:signin is fired when user signs in -->
   <!-- on:signout  is fired when user signs out -->
   <!-- on:in is fired when user is already signed in as well as when user signs in -->
