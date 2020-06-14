@@ -16,5 +16,5 @@ export {
   signInWithTwitter,
   signInWithOAuth,
   signInWithEmailAndPassword,
-  signOut
+  signout
 } from "./store";

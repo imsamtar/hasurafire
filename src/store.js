@@ -41,7 +41,7 @@ export const signInWithEmailAndPassword = (email, password) => {
     return auth().signInWithEmailAndPassword(email, password);
 };
 
-export const signOut = () => {
+export const signout = () => {
     const { auth } = readStore(firebase);
     return auth().signOut();
 };

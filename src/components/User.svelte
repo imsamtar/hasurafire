@@ -1,7 +1,9 @@
 <script>
   import { onMount, createEventDispatcher } from "svelte";
   import { setContext, getContext } from "svelte";
-  import { firebase, currentUser, loginStatus, accessToken } from "../store";
+  import { firebase, currentUser } from "../store";
+  import { loginStatus, accessToken } from "../store";
+  import { signout as signOut } from "../store";
   import { onInterval } from "../utils";
 
   export let refreshTokenEvery = 1000;
@@ -10,6 +12,8 @@
   export let user = undefined;
   export let auth = undefined;
   export let fresh_signin = false;
+  export let signout = signOut;
+  signout = signOut;
 
   let child_of_root = getContext("__root");
 
@@ -53,7 +57,7 @@
 
 {#if child_of_root}
   {#if $loginStatus == 1}
-    <slot {user} {auth} {fresh_signin} />
+    <slot {user} {auth} {fresh_signin} {signout} />
   {:else if $loginStatus == -1}
     <slot name="signed-out" {auth} />
   {:else}
