@@ -3,7 +3,7 @@
   import { setContext, getContext } from "svelte";
   import { firebase, currentUser } from "../store";
   import { loginStatus, accessToken } from "../store";
-  import { signout as signOut } from "../store";
+  import { signOut } from "../store";
   import { onInterval } from "../utils";
 
   export let refreshTokenEvery = 1000;
