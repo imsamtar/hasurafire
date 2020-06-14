@@ -186,8 +186,10 @@ resolve({
   <!-- Here you have access to response object [graphql subscription response] -->
   <!-- let:response response of query -->
   <!-- let:data response.data object -->
+  <!-- let:error error if any -->
   <!-- bind:response response of query -->
   <!-- bind:data response.data object -->
+  <!-- bind:error error if any -->
   <!-- on:response is fired when new response is recieved from subscription -->
   <!-- optional prop: variables, which accepts an object containing all the variables needed for this graplql subscription -->
   <!-- optional prop: role, do this query hasura using a specific role -->
