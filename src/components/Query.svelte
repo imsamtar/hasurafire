@@ -12,9 +12,13 @@
   export let headers = {};
   export let noauth = undefined;
   export let adminsecret = undefined;
+  export let response = undefined;
+  export let data = undefined;
+  response = undefined;
+  $: data = response && response.data;
 
   const dispatch = createEventDispatcher();
-  let graphql, response, error;
+  let graphql, error;
 
   const areEqual = (obj1, obj2) =>
     JSON.stringify(obj1) === JSON.stringify(obj2);
@@ -44,7 +48,7 @@
   {#if error}
     <slot name="error" {error} />
   {:else if response}
-    <slot {response} {error} {execute} />
+    <slot {response} {data} {error} {execute} />
   {:else}
     <slot name="pending" />
   {/if}

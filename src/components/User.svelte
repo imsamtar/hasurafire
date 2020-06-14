@@ -6,8 +6,9 @@
   export let refreshTokenEvery = 1000;
 
   const dispatch = createEventDispatcher();
-  let user, auth;
-  let needToSave = false;
+  export let user = undefined;
+  export let auth = undefined;
+  export let fresh_signin = false;
 
   onMount(() => {
     let interval;
@@ -23,7 +24,7 @@
         $loginStatus = 1;
         if (!firstTime) {
           dispatch("signin", user);
-          needToSave = true;
+          fresh_signin = true;
         }
         dispatch("in", user);
       } else {
@@ -47,7 +48,7 @@
 
 {#if $firebase}
   {#if $loginStatus == 1}
-    <slot {user} {auth} {needToSave} />
+    <slot {user} {auth} {fresh_signin} />
   {:else if $loginStatus == -1}
     <slot name="signed-out" {auth} />
   {:else}

@@ -7,9 +7,13 @@
   export let headers = {};
   export let noauth = undefined;
   export let adminsecret = undefined;
+  export let response = undefined;
+  export let data = undefined;
+  response = undefined;
+  $: data = response && response.data;
 
   const dispatch = createEventDispatcher();
-  let response, exists, error;
+  let exists, error;
 
   onMount(async () => {
     try {
@@ -26,7 +30,7 @@
 </script>
 
 {#if response}
-  <slot {response} />
+  <slot {response} {data} />
 {:else if error}
   {#if exists}
     <slot name="exists" {error} />

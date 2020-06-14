@@ -9,9 +9,13 @@
   export let headers = {};
   export let noauth = undefined;
   export let adminsecret = undefined;
+  export let response = undefined;
+  export let data = undefined;
+  response = undefined;
+  $: data = response && response.data;
 
   const dispatch = createEventDispatcher();
-  let graphql, response;
+  let graphql;
 
   onMount(() => {
     const options = { role, headers, noauth, adminsecret };
@@ -31,7 +35,7 @@
 
 {#if query}
   {#if response}
-    <slot {response} />
+    <slot {response} {data} />
   {:else}
     <slot name="pending" />
   {/if}
