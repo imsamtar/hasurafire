@@ -289,6 +289,6 @@ resolve({
 - call this function to signin with email and password
 - accepts email and password as arguments
 
-### signout
+### signOut
 
 - call this function to signout
