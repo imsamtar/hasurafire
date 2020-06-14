@@ -10,7 +10,7 @@
   export let variables = {};
   export let role = "";
   export let headers = {};
-  export let noauth = undefined;
+  export let noauth = !getContext("__user");
   export let adminsecret = undefined;
   export let response = undefined;
   export let data = undefined;
@@ -44,11 +44,7 @@
 
   onMount(started ? execute : () => {});
   if (every)
-    onInterval(
-      execute,
-      every * 1000,
-      noauth || adminsecret || !getContext("__user") || currentUser
-    );
+    onInterval(execute, every * 1000, noauth || adminsecret || currentUser);
 </script>
 
 {#if mutation}

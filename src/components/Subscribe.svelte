@@ -8,7 +8,7 @@
   export let variables = {};
   export let role = "";
   export let headers = {};
-  export let noauth = undefined;
+  export let noauth = !getContext('__user');
   export let adminsecret = undefined;
   export let response = undefined;
   export let data = undefined;
@@ -21,12 +21,11 @@
   let graphql;
 
   onMount(() => {
-    const is_child_of_user = getContext("__user");
     const options = { role, headers, noauth, adminsecret };
     const { observable, client } = subscribe(query, variables, options);
     const sub = observable.subscribe(
       resp => {
-        if ($currentUser || noauth || adminsecret || !is_child_of_user) {
+        if (noauth || adminsecret || $currentUser) {
           if (resp && resp.data) error = undefined;
           response = resp;
           dispatch("response", resp);
