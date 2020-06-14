@@ -39,7 +39,7 @@ const graphql = {
         link,
         cache: new InMemoryCache(),
       }),
-      () => link.subscriptionClient.close(),
+      link.subscriptionClient,
     ];
   },
 };
@@ -68,7 +68,7 @@ export default {
     const client = graphql.wsClient(headers);
     return {
       observable: client[0].subscribe({ query, variables }),
-      disconnect: client[1],
+      client: client[1],
     };
   },
   mutate(mutation, variables, options = {}) {

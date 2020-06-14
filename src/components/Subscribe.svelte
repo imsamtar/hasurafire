@@ -12,6 +12,8 @@
   export let adminsecret = undefined;
   export let response = undefined;
   export let data = undefined;
+  export let error = undefined;
+  error = undefined;
   response = undefined;
   $: data = response && response.data;
 
@@ -21,23 +23,32 @@
   onMount(() => {
     const is_child_of_user = getContext("__user");
     const options = { role, headers, noauth, adminsecret };
-    const { observable, disconnect } = subscribe(query, variables, options);
-    const sub = observable.subscribe(resp => {
-      if ($currentUser || noauth || adminsecret || !is_child_of_user) {
-        response = resp;
-        dispatch("response", resp);
-      } else sub.unsubscribe();
-    });
+    const { observable, client } = subscribe(query, variables, options);
+    const sub = observable.subscribe(
+      resp => {
+        if ($currentUser || noauth || adminsecret || !is_child_of_user) {
+          if (resp && resp.data) error = undefined;
+          response = resp;
+          dispatch("response", resp);
+        } else {
+          sub.unsubscribe();
+          client.close();
+        }
+      },
+      err => (error = err)
+    );
     return () => {
       sub.unsubscribe();
-      disconnect();
+      client.close();
     };
   });
 </script>
 
 {#if query}
-  {#if response}
-    <slot {response} {data} />
+  {#if error}
+    <slot name="error" {error} />
+  {:else if response}
+    <slot {response} {data} {error} />
   {:else}
     <slot name="pending" />
   {/if}
