@@ -11,6 +11,7 @@ export function onInterval(callback, milliseconds, condition) {
 }
 
 export function readStore(store) {
+  if (typeof store !== "object") return store;
   let temp;
   store.subscribe((data) => (temp = data))();
   return temp;

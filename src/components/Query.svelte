@@ -1,5 +1,5 @@
 <script>
-  import { onMount, createEventDispatcher } from "svelte";
+  import { onMount, getContext, createEventDispatcher } from "svelte";
   import { query as runQuery } from "../graphql";
   import { onInterval } from "../utils";
   import { currentUser } from "../store";
@@ -43,7 +43,12 @@
   };
 
   onMount(started ? execute : () => {});
-  if (every) onInterval(execute, every * 1000, currentUser);
+  if (every)
+    onInterval(
+      execute,
+      every * 1000,
+      noauth || adminsecret || !getContext("__user") || currentUser
+    );
 </script>
 
 {#if query}
