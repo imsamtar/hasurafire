@@ -12,10 +12,8 @@
   },
   "keywords": [
     "svelte",
-    "sapper",
-    "firebase",
-    "hasura",
-    "auth"
+    "firebase-auth",
+    "hasura"
   ],
   "author": "SAMEER TARIQ",
   "license": "ISC",
