@@ -1,5 +1,5 @@
 <script>
-  import { onMount, createEventDispatcher } from "svelte";
+  import { onMount, setContext, createEventDispatcher } from "svelte";
   import { firebase, currentUser, loginStatus, accessToken } from "../store";
   import { onInterval } from "../utils";
 
@@ -10,6 +10,7 @@
   export let auth = undefined;
   export let fresh_signin = false;
 
+  setContext("__user", true);
   onMount(() => {
     let interval;
     let firstTime = true;

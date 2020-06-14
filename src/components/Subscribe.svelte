@@ -1,5 +1,6 @@
 <script>
   import { onMount, onDestroy, createEventDispatcher } from "svelte";
+  import { getContext } from "svelte";
   import { subscribe } from "../graphql";
   import { currentUser } from "../store";
 
@@ -18,10 +19,11 @@
   let graphql;
 
   onMount(() => {
+    const is_child_of_user = getContext("__user");
     const options = { role, headers, noauth, adminsecret };
     const { observable, disconnect } = subscribe(query, variables, options);
     const sub = observable.subscribe(resp => {
-      if ($currentUser) {
+      if ($currentUser || noauth || adminsecret || !is_child_of_user) {
         response = resp;
         dispatch("response", resp);
       } else sub.unsubscribe();
