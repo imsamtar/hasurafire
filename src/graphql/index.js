@@ -17,9 +17,9 @@ function parseQuery(query, type) {
 export const query = (query, variables = {}, options = {}) => {
   return client.query(parseQuery(query, "query"), variables, options)
 };
-export const subscribe = (query, variables = {}, options = {}) => {
-  return client.subscribe(parseQuery(query, "subscription"), variables, options)
-};
 export const mutate = (mutation, variables = {}, options = {}) => {
   return client.mutate(parseQuery(mutation, "mutation"), variables, options)
+};
+export const subscribe = (query, variables = {}, options = {}) => {
+  return client.subscribe(parseQuery(query, "subscription"), variables, options)
 };

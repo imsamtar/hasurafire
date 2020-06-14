@@ -63,6 +63,10 @@ export default {
     const headers = processOptions(options);
     return graphql.httpClient(headers).query({ query, variables });
   },
+  mutate(mutation, variables, options = {}) {
+    const headers = processOptions(options);
+    return graphql.httpClient(headers).mutate({ mutation, variables });
+  },
   subscribe(query, variables, options = {}) {
     const headers = processOptions(options);
     const client = graphql.wsClient(headers);
@@ -70,9 +74,5 @@ export default {
       observable: client[0].subscribe({ query, variables }),
       client: client[1],
     };
-  },
-  mutate(mutation, variables, options = {}) {
-    const headers = processOptions(options);
-    return graphql.httpClient(headers).mutate({ mutation, variables });
-  },
+  }
 };
