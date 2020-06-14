@@ -51,9 +51,15 @@ resolve({
   import { User } from "hasurafire";
 </script>
 
-<User let:user let:auth on:signin on:signout on:in on:out>
+<User (let|bind):user (let|bind):auth (let|bind):fresh_start on:signin on:signout on:in on:out>
   <!-- Here you have access to user object [current firebase user] -->
   <!-- Here you have access to auth object [firebase.auth()] -->
+  <!-- let:user current firebase user -->
+  <!-- let:auth firebase.auth() -->
+  <!-- let:fresh_start current firebase user -->
+  <!-- bind:user current firebase user -->
+  <!-- bind:auth firebase.auth() -->
+  <!-- bind:fresh_start current firebase user -->
   <!-- on:signin is fired when user signs in -->
   <!-- on:signout  is fired when user signs out -->
   <!-- on:in is fired when user is already signed in as well as when user signs in -->
@@ -72,19 +78,25 @@ resolve({
   import { User, SaveUser } from "hasurafire";
 </script>
 
-<User let:user={{ email, displayName }} let:needToSave>
-  {#if needToSave}
-    <SaveUser {mutation} variables={{ email, name: displayName }} let:response on:error={signOut} >
+<User let:user={{ email }} let:fresh_start>
+  {#if fresh_start}
+    <SaveUser {mutation} variables={{ email }} on:error={signOut} >
       <!-- Here you have access to response object [mutation response] -->
+      <!-- let:response response of mutation -->
+      <!-- let:data response.data object -->
+      <!-- let:error error if any -->
+      <!-- bind:response response of mutation -->
+      <!-- bind:data response.data object -->
+      <!-- bind:error error if any -->
       <!-- on:new is fired when user successfull saved -->
-      <!-- on:exists  is fired when user is already saved -->
+      <!-- on:already_exists  is fired when user is already exists -->
       <!-- on:error is fired when some problem occours -->
       <!-- optional prop: role, save user while using a specific role -->
       <!-- optional prop: headers, save user while passing custom request headers to hasura -->
       <!-- optional prop: noauth, save user without authentication -->
       <!-- optional prop: adminsecret, save user using admin secret insead of firebase auth -->
       <!-- slot:default if saved successfully -->
-      <!-- slot:exists if user already saved -->
+      <!-- slot:already_exists if user already exists -->
       <!-- slot:error if some problem occours saving -->
       <!-- slot:pending while user is being saved --> 
       <!-- slot:* which is rendered all the time-->
@@ -105,6 +117,12 @@ resolve({
   <!-- prop: query, which accepts three types of input queryName|stringQuery|gqlTagQuery -->
   <!-- Here you have access to execute function, calling this function will execute this query -->
   <!-- Here you have access to response object [graphql query response] -->
+  <!-- let:response response of query -->
+  <!-- let:data response.data object -->
+  <!-- let:error error if any -->
+  <!-- bind:response response of query -->
+  <!-- bind:data response.data object -->
+  <!-- bind:error error if any -->
   <!-- on:response is fired when new response is recieved from query -->
   <!-- on:error  is fired when some error occurs while quering -->
   <!-- optional prop: variables, which accepts an object containing all the variables needed for this graplql query -->
@@ -133,6 +151,12 @@ resolve({
   <!-- prop: mutation, which accepts three types of input mutationName|stringMutation|gqlTagMutation -->
   <!-- Here you have access to execute function, calling this function will execute this mutation -->
   <!-- Here you have access to response object [graphql mutation response] -->
+  <!-- let:response response of mutation -->
+  <!-- let:data response.data object -->
+  <!-- let:error error if any -->
+  <!-- bind:response response of mutation -->
+  <!-- bind:data response.data object -->
+  <!-- bind:error error if any -->
   <!-- on:response is fired when new response is recieved from mutation -->
   <!-- on:error  is fired when some error occurs while quering -->
   <!-- optional prop: variables, which accepts an object containing all the variables needed for this graplql mutation -->
@@ -160,6 +184,10 @@ resolve({
 <Subscribe {query} {variables} let:response on:response>
   <!-- prop: query, which accepts three types of input queryName|stringQuery|gqlTagQuery -->
   <!-- Here you have access to response object [graphql subscription response] -->
+  <!-- let:response response of query -->
+  <!-- let:data response.data object -->
+  <!-- bind:response response of query -->
+  <!-- bind:data response.data object -->
   <!-- on:response is fired when new response is recieved from subscription -->
   <!-- optional prop: variables, which accepts an object containing all the variables needed for this graplql subscription -->
   <!-- optional prop: role, do this query hasura using a specific role -->
