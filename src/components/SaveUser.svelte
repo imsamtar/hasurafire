@@ -9,11 +9,13 @@
   export let adminsecret = undefined;
   export let response = undefined;
   export let data = undefined;
+  export let error = undefined;
+  error = undefined;
   response = undefined;
   $: data = response && response.data;
 
   const dispatch = createEventDispatcher();
-  let exists, error;
+  let already_exists;
 
   onMount(async () => {
     try {
@@ -21,8 +23,8 @@
       response = await mutate(mutation, variables, options);
       dispatch("new", response);
     } catch (err) {
-      let exists = err.message.indexOf("niqueness") > -1;
-      if (exists) dispatch("exists", err);
+      let already_exists = err.message.indexOf("niqueness") > -1;
+      if (already_exists) dispatch("already_exists", err);
       else dispatch("error", err);
       error = err;
     }
@@ -32,8 +34,8 @@
 {#if response}
   <slot {response} {data} />
 {:else if error}
-  {#if exists}
-    <slot name="exists" {error} />
+  {#if already_exists}
+    <slot name="already_exists" {error} />
   {:else}
     <slot name="error" {error} />
   {/if}

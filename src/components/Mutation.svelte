@@ -14,11 +14,13 @@
   export let adminsecret = undefined;
   export let response = undefined;
   export let data = undefined;
+  export let error = undefined;
+  error = undefined;
   response = undefined;
   $: data = response && response.data;
 
   const dispatch = createEventDispatcher();
-  let graphql, error;
+  let graphql;
 
   const areEqual = (obj1, obj2) =>
     JSON.stringify(obj1) === JSON.stringify(obj2);
