@@ -52,6 +52,7 @@
 
 {#if child_of_root}
   {#if mutation}
+    <slot name="start" />
     {#if error}
       <slot name="error" {error} />
     {:else if response}
@@ -59,7 +60,7 @@
     {:else}
       <slot name="pending" />
     {/if}
-    <slot name="*" />
+    <slot name="end" />
   {:else}
     <p>
       Prop

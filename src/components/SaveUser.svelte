@@ -34,6 +34,7 @@
 </script>
 
 {#if child_of_root}
+  <slot name="start" />
   {#if response}
     <slot {response} {data} />
   {:else if error}
@@ -45,7 +46,7 @@
   {:else}
     <slot name="pending" />
   {/if}
-  <slot name="*" />
+  <slot name="end" />
 {:else}
   <p>
     This component must be a child of

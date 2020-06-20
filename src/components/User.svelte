@@ -56,6 +56,7 @@
 </script>
 
 {#if child_of_root}
+  <slot name="start" />
   {#if $loginStatus == 1}
     <slot {user} {auth} {fresh_signin} {signout} />
   {:else if $loginStatus == -1}
@@ -63,7 +64,7 @@
   {:else}
     <slot name="pending" {auth} />
   {/if}
-  <slot name="*" />
+  <slot name="end" />
 {:else}
   <p>
     This component must be a child of
