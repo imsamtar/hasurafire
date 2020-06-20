@@ -75,7 +75,8 @@ resolve({
   <!-- slot:default if user is signed in -->
   <!-- slot:signed-out if user is signed out -->
   <!-- slot:pending if not sure signed in or not -->
-  <!-- slot:* which is rendered all the time-->
+  <!-- slot:start which is rendered all the time-->
+  <!-- slot:end which is rendered all the time-->
 </User>
 ```
 
@@ -106,8 +107,9 @@ resolve({
       <!-- slot:default if saved successfully -->
       <!-- slot:already_exists if user already exists -->
       <!-- slot:error if some problem occours saving -->
-      <!-- slot:pending while user is being saved --> 
-      <!-- slot:* which is rendered all the time-->
+      <!-- slot:pending while user is being saved -->
+      <!-- slot:start which is rendered all the time-->
+      <!-- slot:end which is rendered all the time-->
     </SaveUser>
   {/if}
 </User>
@@ -143,7 +145,8 @@ resolve({
   <!-- slot:default if query successfull -->
   <!-- slot:error if some problem occours while quering -->
   <!-- slot:pending while query is being executed -->
-  <!-- slot:* which is rendered all the time-->
+  <!-- slot:start which is rendered all the time-->
+  <!-- slot:end which is rendered all the time-->
 </Query>
 ```
 
@@ -177,7 +180,8 @@ resolve({
   <!-- slot:default if mutation successfull -->
   <!-- slot:error if some problem occours while mutating -->
   <!-- slot:pending while mutation is being executed -->
-  <!-- slot:* which is rendered all the time-->
+  <!-- slot:start which is rendered all the time-->
+  <!-- slot:end which is rendered all the time-->
 </Mutation>
 ```
 
@@ -206,7 +210,8 @@ resolve({
   <!-- optional prop: adminsecret, do this query using admin secret insead of firebase auth -->
   <!-- slot:default if subscription successfull -->
   <!-- slot:pending while subscribing -->
-  <!-- slot:* which is rendered all the time-->
+  <!-- slot:start which is rendered all the time-->
+  <!-- slot:end which is rendered all the time-->
 </Subscribe>
 ```
 
