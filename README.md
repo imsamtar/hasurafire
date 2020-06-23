@@ -123,7 +123,8 @@ resolve({
   const variables = {};
 </script>
 
-<Query {query} {variables} let:execute let:response on:response on:error>
+<Query started {query} {variables} let:execute let:response on:response on:error>
+  <!-- prop: started, which is passed if query is to be started on mount -->
   <!-- prop: query, which accepts three types of input queryName|stringQuery|gqlTagQuery -->
   <!-- Here you have access to execute function, calling this function will execute this query -->
   <!-- Here you have access to response object [graphql query response] -->
@@ -154,11 +155,12 @@ resolve({
 
 ```html
 <script>
-  import { Mutation } from "hasurafire";
+  import { Mutate } from "hasurafire";
   const variables = {};
 </script>
 
-<Mutation {mutation} {variables} let:execute let:response on:response on:error>
+<Mutate started {mutation} {variables} let:execute let:response on:response on:error>
+  <!-- prop: started, which is passed if mutation is to be started on mount -->
   <!-- prop: mutation, which accepts three types of input mutationName|stringMutation|gqlTagMutation -->
   <!-- Here you have access to execute function, calling this function will execute this mutation -->
   <!-- Here you have access to response object [graphql mutation response] -->
@@ -182,7 +184,7 @@ resolve({
   <!-- slot:pending while mutation is being executed -->
   <!-- slot:start which is rendered all the time-->
   <!-- slot:end which is rendered all the time-->
-</Mutation>
+</Mutate>
 ```
 
 ## Subscribe
