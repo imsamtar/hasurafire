@@ -151,7 +151,7 @@ resolve({
 </Query>
 ```
 
-## Mutation
+## Mutate
 
 ```html
 <script>
