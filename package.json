@@ -30,9 +30,11 @@
     "apollo-client": "^2.6.8",
     "apollo-link-http": "^1.5.16",
     "apollo-link-ws": "^1.0.19",
-    "graphql": "^15.0.0",
+    "bufferutil": "^4.0.1",
+    "graphql": "^14.0.0",
     "graphql-tag": "^2.10.3",
-    "subscriptions-transport-ws": "^0.9.16"
+    "subscriptions-transport-ws": "^0.9.16",
+    "utf-8-validate": "^5.0.2"
   },
   "files": [
     "src"
