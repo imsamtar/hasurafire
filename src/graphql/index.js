@@ -1,3 +1,4 @@
+import { get } from "svelte/store";
 import gql from "graphql-tag";
 import client from "./client";
 import { queries } from "../store";
@@ -7,7 +8,7 @@ function parseQuery(query, type) {
     query &&
       query.indexOf(" ") === -1 &&
       query.indexOf("{") === -1 &&
-      queries.subscribe((queries) => (query = queries[query] || query))();
+      (query = get(queries)[query] || query);
     query = query.replace(/^\s*(query|mutation|subscription)?\s*/g, `${type} `);
     return gql(query);
   }

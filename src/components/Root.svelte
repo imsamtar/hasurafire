@@ -10,7 +10,8 @@
   import { analytics as _analytics } from "../store";
   import { queries as _queries } from "../store";
 
-  export let firebaseConfig, endpoint;
+  export let endpoint = undefined;
+  export let firebaseConfig = undefined;
   export let queries = {};
   export let schema = "";
   export let analytics = false;
@@ -18,35 +19,38 @@
 
   setContext("__root", true);
   onMount(function() {
-    if (!firebaseConfig || !endpoint) return;
-    if (firebase.apps.length === 0) firebase.initializeApp(firebaseConfig);
-    window.firebase = firebase;
-    $_analytics = analytics && firebase.analytics();
-    $performance = perf && firebase.performance();
-    $_firebase = firebase;
-    $hasuraEndpoint = endpoint;
-    if (typeof queries == "object") {
-      for (const key in queries)
-        if (typeof queries[key] === "string")
-          if (schema) queries[key] = queries[key].replace(/%s/g, schema);
-          else queries[key] = queries[key].replace(/%s_?/g, "");
-      $_queries = queries;
+    if (endpoint) {
+      $hasuraEndpoint = endpoint;
+      if (typeof queries == "object") {
+        for (const key in queries)
+          if (typeof queries[key] === "string")
+            if (schema) queries[key] = queries[key].replace(/%s/g, schema);
+            else queries[key] = queries[key].replace(/%s_?/g, "");
+        $_queries = queries;
+      }
+    }
+    if (firebaseConfig) {
+      if (firebase.apps.length === 0) firebase.initializeApp(firebaseConfig);
+      $_firebase = firebase;
+      window.firebase = firebase;
+      $_analytics = analytics && firebase.analytics();
+      $performance = perf && firebase.performance();
     }
   });
 </script>
 
-{#if $_firebase && endpoint}
-  <slot {firebase} />
-{:else if !firebaseConfig}
+<slot {firebase} />
+
+<!-- {:else if !firebaseConfig}
   <p>
     Prop
     <code>firebaseConfig</code>
     is required.
-  </p>
-{:else if !endpoint}
+  </p> -->
+<!-- {:else if !endpoint}
   <p>
     Prop
     <code>endpoint</code>
     is required.
   </p>
-{/if}
+{/if} -->
