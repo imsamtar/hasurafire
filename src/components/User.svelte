@@ -22,14 +22,15 @@
   function initialize() {
     let interval;
     let firstTime = true;
-    $firebase.auth().onAuthStateChanged(async user => {
+    $firebase.auth().onAuthStateChanged(async function(user) {
       if (user) {
         $accessToken = await user.getIdToken(true);
         $currentUser = user;
-        interval = setInterval(
-          async () => ($accessToken = await user.getIdToken(true)),
-          refreshTokenEvery * 1000
-        );
+
+        interval = setInterval(async function() {
+          $accessToken = await user.getIdToken(true);
+        }, refreshTokenEvery * 1000);
+
         $loginStatus = 1;
         if (!firstTime) {
           dispatch("signin", user);

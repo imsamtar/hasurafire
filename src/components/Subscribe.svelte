@@ -38,9 +38,11 @@
           client.close();
         }
       },
-      err => (error = err)
+      function(err) {
+        error = err;
+      }
     );
-    return () => {
+    return function() {
       sub.unsubscribe();
       client.close();
     };
