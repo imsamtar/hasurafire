@@ -18,7 +18,7 @@
   let child_of_root = getContext("__root");
 
   setContext("__user", true);
-  onMount(() => {
+  onMount(function() {
     if (!child_of_root) return;
     let interval;
     let firstTime = true;

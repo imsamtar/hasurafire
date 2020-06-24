@@ -27,7 +27,7 @@
   const areEqual = (obj1, obj2) =>
     JSON.stringify(obj1) === JSON.stringify(obj2);
 
-  execute = async () => {
+  execute = async function() {
     if (!child_of_root || !mutation) return;
     try {
       const options = { role, headers, noauth, adminsecret };

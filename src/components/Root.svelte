@@ -17,11 +17,9 @@
   export let perf = false;
 
   setContext("__root", true);
-  onMount(() => {
+  onMount(function() {
     if (!firebaseConfig || !endpoint) return;
-    if (firebase.apps.length === 0) {
-      firebase.initializeApp(firebaseConfig);
-    }
+    if (firebase.apps.length === 0) firebase.initializeApp(firebaseConfig);
     window.firebase = firebase;
     $_analytics = analytics && firebase.analytics();
     $performance = perf && firebase.performance();

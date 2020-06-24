@@ -21,7 +21,7 @@
   let graphql;
   let child_of_root = getContext("__root");
 
-  onMount(() => {
+  onMount(function() {
     if (!child_of_root || !query) return;
     const options = { role, headers, noauth, adminsecret };
     const { observable, client } = subscribe(query, variables, options);

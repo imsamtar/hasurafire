@@ -18,7 +18,7 @@
   let already_exists;
   let child_of_root = getContext("__root");
 
-  onMount(async () => {
+  onMount(async function() {
     if (!child_of_root || !mutation) return;
     try {
       const options = { role, headers, noauth, adminsecret };
