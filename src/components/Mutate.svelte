@@ -24,8 +24,9 @@
   let graphql;
   let child_of_root = getContext("__root");
 
-  const areEqual = (obj1, obj2) =>
-    JSON.stringify(obj1) === JSON.stringify(obj2);
+  function areEqual(obj1, obj2) {
+    return JSON.stringify(obj1) === JSON.stringify(obj2);
+  }
 
   execute = async function() {
     if (!child_of_root || !mutation || !$hasuraEndpoint) return;
