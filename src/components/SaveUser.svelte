@@ -1,6 +1,8 @@
 <script>
   import { onMount, getContext, createEventDispatcher } from "svelte";
   import { mutate } from "../graphql";
+  import { hasuraEndpoint } from "../store";
+
   export let mutation;
   export let variables = {};
   export let role = "";
@@ -19,7 +21,7 @@
   let child_of_root = getContext("__root");
 
   onMount(async function() {
-    if (!child_of_root || !mutation) return;
+    if (!child_of_root || !mutation || !$hasuraEndpoint) return;
     try {
       const options = { role, headers, noauth, adminsecret };
       response = await mutate(mutation, variables, options);
@@ -34,19 +36,27 @@
 </script>
 
 {#if child_of_root}
-  <slot name="start" />
-  {#if response}
-    <slot {response} {data} />
-  {:else if error}
-    {#if already_exists}
-      <slot name="already_exists" {error} />
+  {#if $hasuraEndpoint}
+    <slot name="start" />
+    {#if response}
+      <slot {response} {data} />
+    {:else if error}
+      {#if already_exists}
+        <slot name="already_exists" {error} />
+      {:else}
+        <slot name="error" {error} />
+      {/if}
     {:else}
-      <slot name="error" {error} />
+      <slot name="pending" />
     {/if}
+    <slot name="end" />
   {:else}
-    <slot name="pending" />
+    <p>
+      Must provide endpoint prop to
+      <code>Root</code>
+      component.
+    </p>
   {/if}
-  <slot name="end" />
 {:else}
   <p>
     This component must be a child of

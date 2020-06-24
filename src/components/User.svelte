@@ -7,19 +7,19 @@
   import { onInterval } from "../utils";
 
   export let refreshTokenEvery = 1000;
-
-  const dispatch = createEventDispatcher();
   export let user = undefined;
   export let auth = undefined;
   export let fresh_signin = false;
   export let signout = signOut;
   signout = signOut;
 
+  const dispatch = createEventDispatcher();
+
   let child_of_root = getContext("__root");
 
   setContext("__user", true);
-  onMount(function() {
-    if (!child_of_root) return;
+
+  function initialize() {
     let interval;
     let firstTime = true;
     $firebase.auth().onAuthStateChanged(async user => {
@@ -47,15 +47,17 @@
       firstTime = false;
     });
     auth = $firebase.auth();
-  });
+  }
 
-  $: if (typeof window == "object" && child_of_root) {
+  $: if (child_of_root && $firebase) initialize();
+
+  $: if (typeof window == "object" && child_of_root && $firebase) {
     user = $currentUser;
     auth = $firebase.auth();
   }
 </script>
 
-{#if child_of_root}
+{#if child_of_root && $firebase}
   <slot name="start" />
   {#if $loginStatus == 1}
     <slot {user} {auth} {fresh_signin} {signout} />
@@ -65,6 +67,14 @@
     <slot name="pending" {auth} />
   {/if}
   <slot name="end" />
+{:else if !$firebase}
+  <p>
+    Prop
+    <code>firebaseConfig</code>
+    not passed to
+    <code>Root</code>
+    component.
+  </p>
 {:else}
   <p>
     This component must be a child of

@@ -2,7 +2,7 @@
   import { onMount, getContext, createEventDispatcher } from "svelte";
   import { mutate } from "../graphql";
   import { onInterval } from "../utils";
-  import { currentUser } from "../store";
+  import { currentUser, hasuraEndpoint } from "../store";
 
   export let mutation;
   export let every = false;
@@ -28,7 +28,7 @@
     JSON.stringify(obj1) === JSON.stringify(obj2);
 
   execute = async function() {
-    if (!child_of_root || !mutation) return;
+    if (!child_of_root || !mutation || !$hasuraEndpoint) return;
     try {
       const options = { role, headers, noauth, adminsecret };
       let resp = await mutate(mutation, variables, options);
@@ -45,27 +45,38 @@
     }
   };
 
-  onMount(started ? execute : () => {});
+  onMount(function() {
+    started && setTimeout(execute, 0);
+  });
+
   if (every)
     onInterval(execute, every * 1000, noauth || adminsecret || currentUser);
 </script>
 
 {#if child_of_root}
-  {#if mutation}
-    <slot name="start" />
-    {#if error}
-      <slot name="error" {error} />
-    {:else if response}
-      <slot {response} {data} {error} {execute} />
+  {#if $hasuraEndpoint}
+    {#if mutation}
+      <slot name="start" />
+      {#if error}
+        <slot name="error" {error} />
+      {:else if response}
+        <slot {response} {data} {error} {execute} />
+      {:else}
+        <slot name="pending" />
+      {/if}
+      <slot name="end" />
     {:else}
-      <slot name="pending" />
+      <p>
+        Prop
+        <code>mutation</code>
+        is required.
+      </p>
     {/if}
-    <slot name="end" />
   {:else}
     <p>
-      Prop
-      <code>mutation</code>
-      is required.
+      Must provide endpoint prop to
+      <code>Root</code>
+      component.
     </p>
   {/if}
 {:else}
