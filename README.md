@@ -291,6 +291,26 @@ resolve({
 
 - call this function to signin with popup with 0Auth
 
+### signInWithGoogleRedirect
+
+- call this function to signin with redirect with google
+
+### signInWithGithubRedirect
+
+- call this function to signin with redirect with github
+
+### signInWithFacebookRedirect
+
+- call this function to signin with redirect with facebook
+
+### signInWithTwitterRedirect
+
+- call this function to signin with redirect with twitter
+
+### signInWithOAuthRedirect
+
+- call this function to signin with redirect with 0Auth
+
 ### signInWithEmailAndPassword
 
 - call this function to signin with email and password
