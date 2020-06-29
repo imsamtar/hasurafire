@@ -11,37 +11,96 @@ export const hasuraEndpoint = writable("");
 export const queries = writable({});
 export default firebase;
 
-export const signInWithGoogle = () => {
+function processProvider(provider, scopes, options) {
+    if (scopes instanceof Array)
+        for (const scope of scopes) provider.addScope(scope);
+    provider.setCustomParameters(options);
+}
+
+// For signInWithPopup
+
+export function signInWithGoogle(scopes = [], options = {}) {
     const { auth } = readStore(firebase);
-    return auth().signInWithPopup(new auth.GoogleAuthProvider());
+    const provider = new auth.GoogleAuthProvider();
+    processProvider(provider, scopes, options);
+    return auth().signInWithPopup(provider);
 };
 
-export const signInWithGithub = () => {
+export function signInWithGithub(scopes = [], options = {}) {
     const { auth } = readStore(firebase);
-    return auth().signInWithPopup(new auth.GithubAuthProvider());
+    const provider = new auth.GithubAuthProvider();
+    processProvider(provider, scopes, options);
+    return auth().signInWithPopup(provider);
 };
 
-export const signInWithFacebook = () => {
+export function signInWithFacebook(scopes = [], options = {}) {
     const { auth } = readStore(firebase);
-    return auth().signInWithPopup(new auth.FacebookAuthProvider());
+    const provider = new auth.FacebookAuthProvider();
+    processProvider(provider, scopes, options);
+    return auth().signInWithPopup(provider);
 };
 
-export const signInWithTwitter = () => {
+export function signInWithTwitter(scopes = [], options = {}) {
     const { auth } = readStore(firebase);
-    return auth().signInWithPopup(new auth.TwitterAuthProvider());
+    const provider = new auth.TwitterAuthProvider();
+    processProvider(provider, scopes, options);
+    return auth().signInWithPopup(provider);
 };
 
-export const signInWithOAuth = () => {
+export function signInWithOAuth(scopes = [], options = {}) {
     const { auth } = readStore(firebase);
-    return auth().signInWithPopup(new auth.OAuthProvider());
+    const provider = new auth.OAuthProvider();
+    processProvider(provider, scopes, options);
+    return auth().signInWithPopup(provider);
 };
 
-export const signInWithEmailAndPassword = (email, password) => {
+// For signInWithRedirect
+
+export function signInWithGoogleRedirect(scopes = [], options = {}) {
+    const { auth } = readStore(firebase);
+    const provider = new auth.GoogleAuthProvider();
+    processProvider(provider, scopes, options);
+    return auth().signInWithRedirect(provider);
+};
+
+export function signInWithGithubRedirect(scopes = [], options = {}) {
+    const { auth } = readStore(firebase);
+    const provider = new auth.GithubAuthProvider();
+    processProvider(provider, scopes, options);
+    return auth().signInWithRedirect(provider);
+};
+
+export function signInWithFacebookRedirect(scopes = [], options = {}) {
+    const { auth } = readStore(firebase);
+    const provider = new auth.FacebookAuthProvider();
+    processProvider(provider, scopes, options);
+    return auth().signInWithRedirect(provider);
+};
+
+export function signInWithTwitterRedirect(scopes = [], options = {}) {
+    const { auth } = readStore(firebase);
+    const provider = new auth.TwitterAuthProvider();
+    processProvider(provider, scopes, options);
+    return auth().signInWithRedirect(provider);
+};
+
+export function signInWithOAuthRedirect(scopes = [], options = {}) {
+    const { auth } = readStore(firebase);
+    const provider = new auth.OAuthProvider();
+    processProvider(provider, scopes, options);
+    return auth().signInWithRedirect(provider);
+};
+
+// Other signin mathods
+
+export function signInWithEmailAndPassword(email, password) {
     const { auth } = readStore(firebase);
     return auth().signInWithEmailAndPassword(email, password);
 };
 
-export const signOut = () => {
+// Signout
+
+export function signOut() {
     const { auth } = readStore(firebase);
     return auth().signOut();
 };

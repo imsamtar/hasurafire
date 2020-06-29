@@ -15,6 +15,11 @@ export {
   signInWithFacebook,
   signInWithTwitter,
   signInWithOAuth,
+  signInWithGoogleRedirect,
+  signInWithGithubRedirect,
+  signInWithFacebookRedirect,
+  signInWithTwitterRedirect,
+  signInWithOAuthRedirect,
   signInWithEmailAndPassword,
   signOut
 } from "./store";
