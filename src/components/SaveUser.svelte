@@ -27,7 +27,7 @@
       response = await mutate(mutation, variables, options);
       dispatch("new", response);
     } catch (err) {
-      let already_exists = err.message.indexOf("niqueness") > -1;
+      already_exists = /uniqueness/i.test(err.message);
       if (already_exists) dispatch("already_exists", err);
       else dispatch("error", err);
       error = err;
