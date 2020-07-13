@@ -9,6 +9,10 @@
   export let refreshTokenEvery = 1000;
   export let user = undefined;
   export let auth = undefined;
+  export let pending = undefined;
+  let component = undefined;
+  export { component as in };
+  export let out = undefined;
   export let fresh_signin = false;
   export let signout = signOut;
   signout = signOut;
@@ -59,15 +63,36 @@
 </script>
 
 {#if child_of_root && $firebase}
+  <!-- always rendered -->
   <slot name="start" />
   {#if $loginStatus == 1}
-    <slot {user} {auth} {fresh_signin} {signout} />
+    <!-- if signed in -->
+    {#if component}
+      <slot {user} {auth} {fresh_signin} {signout} />
+    {:else}
+      <svelte:component this={out} {user} {auth} {fresh_signin} {signout} />
+    {/if}
+    <!----->
   {:else if $loginStatus == -1}
-    <slot name="signed-out" {auth} />
+    <!-- if signed out -->
+    {#if out}
+      <svelte:component this={out} {auth} />
+    {:else}
+      <slot name="signed-out" {auth} />
+    {/if}
+    <!----->
+  {:else if pending}
+    <!-- if pending -->
+    <svelte:component this={pending} {auth} />
+    <!----->
   {:else}
+    <!-- if pending -->
     <slot name="pending" {auth} />
+    <!----->
   {/if}
+  <!-- always rendered -->
   <slot name="end" />
+  <!----->
 {:else if !$firebase}
   <p>
     Prop

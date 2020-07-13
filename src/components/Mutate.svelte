@@ -16,6 +16,11 @@
   export let data = undefined;
   export let execute = undefined;
   export let error = undefined;
+  /********* compoments ***********/
+  export let component = undefined;
+  export let pending = undefined;
+  export let alt = undefined;
+  /********************************/
   error = undefined;
   response = undefined;
   $: data = response && response.data;
@@ -59,11 +64,32 @@
     {#if mutation}
       <slot name="start" />
       {#if error}
-        <slot name="error" {error} />
+        <!-- if mutation fails -->
+        {#if alt}
+          <svelte:component this={alt} {error} />
+        {:else}
+          <slot name="error" {error} />
+        {/if}
+        <!----->
       {:else if response}
-        <slot {response} {data} {error} {execute} />
+        <!-- if mutation successful -->
+        {#if component}
+          <svelte:component
+            this={component}
+            {response}
+            {data}
+            {error}
+            {execute} />
+        {:else}
+          <slot {response} {data} {error} {execute} />
+        {/if}
+        <!----->
+      {:else if pending}
+        <!-- if pending -->
+        <svelte:component this={pending} />
       {:else}
         <slot name="pending" />
+        <!----->
       {/if}
       <slot name="end" />
     {:else}

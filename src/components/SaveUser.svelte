@@ -12,6 +12,11 @@
   export let response = undefined;
   export let data = undefined;
   export let error = undefined;
+  /********* compoments ***********/
+  export let component = undefined;
+  export let pending = undefined;
+  export let alt = undefined;
+  /********************************/
   error = undefined;
   response = undefined;
   $: data = response && response.data;
@@ -39,15 +44,29 @@
   {#if $hasuraEndpoint}
     <slot name="start" />
     {#if response}
-      <slot {response} {data} />
+      <!-- if saved successfully -->
+      {#if component}
+        <svelte:component this={component} {response} {data} {error} />
+      {:else}
+        <slot {response} {data} />
+      {/if}
+      <!----->
     {:else if error}
-      {#if already_exists}
+      <!-- if mutation fails -->
+      {#if alt}
+        <svelte:component this={alt} {error} {already_exists} />
+      {:else if already_exists}
         <slot name="already_exists" {error} />
       {:else}
         <slot name="error" {error} />
       {/if}
+      <!----->
+    {:else if pending}
+      <!-- if pending -->
+      <svelte:component this={pending} />
     {:else}
       <slot name="pending" />
+      <!----->
     {/if}
     <slot name="end" />
   {:else}

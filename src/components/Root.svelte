@@ -16,6 +16,7 @@
   export let schema = "";
   export let analytics = false;
   export let perf = false;
+  export let component = undefined;
 
   setContext("__root", true);
   onMount(function() {
@@ -39,18 +40,8 @@
   });
 </script>
 
-<slot {firebase} />
-
-<!-- {:else if !firebaseConfig}
-  <p>
-    Prop
-    <code>firebaseConfig</code>
-    is required.
-  </p> -->
-<!-- {:else if !endpoint}
-  <p>
-    Prop
-    <code>endpoint</code>
-    is required.
-  </p>
-{/if} -->
+{#if component}
+  <svelte:component this={component} {firebase} />
+{:else}
+  <slot {firebase} />
+{/if}
