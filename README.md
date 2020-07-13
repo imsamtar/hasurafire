@@ -47,6 +47,8 @@ resolve({
   <!-- optional prop: analytics, firebase analytics -->
   <!-- optional prop: perf, firebase performence -->
   <!-- optional prop: schema, value which will replace %s in queries with itself -->
+  <!-- component props -->
+    <!-- component -->
 </Root>
 ```
 
@@ -77,6 +79,10 @@ resolve({
   <!-- slot:pending if not sure signed in or not -->
   <!-- slot:start which is rendered all the time-->
   <!-- slot:end which is rendered all the time-->
+  <!-- component props -->
+    <!-- pending -->
+    <!-- component -->
+    <!-- out -->
 </User>
 ```
 
@@ -110,6 +116,10 @@ resolve({
       <!-- slot:pending while user is being saved -->
       <!-- slot:start which is rendered all the time-->
       <!-- slot:end which is rendered all the time-->
+      <!-- component props -->
+        <!-- pending -->
+        <!-- component -->
+        <!-- alt -->
     </SaveUser>
   {/if}
 </User>
@@ -148,6 +158,10 @@ resolve({
   <!-- slot:pending while query is being executed -->
   <!-- slot:start which is rendered all the time-->
   <!-- slot:end which is rendered all the time-->
+  <!-- component props -->
+    <!-- pending -->
+    <!-- component -->
+    <!-- alt -->
 </Query>
 ```
 
@@ -184,6 +198,10 @@ resolve({
   <!-- slot:pending while mutation is being executed -->
   <!-- slot:start which is rendered all the time-->
   <!-- slot:end which is rendered all the time-->
+  <!-- component props -->
+    <!-- pending -->
+    <!-- component -->
+    <!-- alt -->
 </Mutate>
 ```
 
@@ -214,6 +232,10 @@ resolve({
   <!-- slot:pending while subscribing -->
   <!-- slot:start which is rendered all the time-->
   <!-- slot:end which is rendered all the time-->
+  <!-- component props -->
+    <!-- pending -->
+    <!-- component -->
+    <!-- alt -->
 </Subscribe>
 ```
 
