@@ -67,9 +67,9 @@
   {#if $loginStatus == 1}
     <!-- if signed in -->
     {#if component}
-      <slot {user} {auth} {fresh_signin} {signout} />
-    {:else}
       <svelte:component this={out} {user} {auth} {fresh_signin} {signout} />
+    {:else}
+      <slot {user} {auth} {fresh_signin} {signout} />
     {/if}
     <!----->
   {:else if $loginStatus == -1}
