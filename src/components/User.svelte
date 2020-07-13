@@ -10,8 +10,7 @@
   export let user = undefined;
   export let auth = undefined;
   export let pending = undefined;
-  let component = undefined;
-  export { component as in };
+  export let component = undefined;
   export let out = undefined;
   export let fresh_signin = false;
   export let signout = signOut;
