@@ -15,6 +15,7 @@
   /********* compoments ***********/
   export let component = undefined;
   export let pending = undefined;
+  export let exists = undefined;
   export let alt = undefined;
   /********************************/
   error = undefined;
@@ -53,10 +54,14 @@
       <!----->
     {:else if error}
       <!-- if mutation fails -->
-      {#if alt}
-        <svelte:component this={alt} {error} {already_exists} />
-      {:else if already_exists}
-        <slot name="already_exists" {error} />
+      {#if already_exists}
+        {#if exists}
+          <svelte:component this={exists} {error} />
+        {:else}
+          <slot name="already_exists" {error} />
+        {/if}
+      {:else if alt}
+        <svelte:component this={alt} {error} />
       {:else}
         <slot name="error" {error} />
       {/if}
