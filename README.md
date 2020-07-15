@@ -295,6 +295,10 @@ resolve({
 
 - JWT access token of currently signed-in user
 
+### global
+
+- fallback values for query, mutation and subscription variables
+
 ### signInWithGoogle
 
 - call this function to signin with popup with google
