@@ -39,10 +39,11 @@ resolve({
   };
 </script>
 
-<Root {...config} let:firebase>
+<Root {...config} global={{uid: '100'}} let:firebase>
   <!-- Here you have access to firebase object -->
   <!-- prop: firebaseConfig -->
   <!-- prop: endpoint, hasura graphql endpoint -->
+  <!-- global: fallback, values for query if mutation variables undefined -->
   <!-- optional prop: queries, object with all queries, mutations and subscriptions -->
   <!-- optional prop: analytics, firebase analytics -->
   <!-- optional prop: perf, firebase performence -->
