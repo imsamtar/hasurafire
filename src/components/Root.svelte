@@ -47,7 +47,9 @@
   });
 
   /* Reactive statement to update global store whenever update in global prop */
-  $: $globalStore = { ...$globalStore, ...global };
+  $: if (typeof global === "object" && global !== null) {
+    $globalStore = { ...$globalStore, ...global };
+  }
 </script>
 
 {#if component}
