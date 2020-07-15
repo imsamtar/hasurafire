@@ -47,7 +47,7 @@ resolve({
   <!-- optional prop: global, fallback values for query variables if variable undefined -->
   <!-- optional prop: analytics, firebase analytics -->
   <!-- optional prop: perf, firebase performence -->
-  <!-- optional prop: schema, value which will replace %s in queries with itself -->
+  <!-- optional prop: schema, value which will replace %s in queries -->
   <!-- component props -->
     <!-- component -->
 </Root>
