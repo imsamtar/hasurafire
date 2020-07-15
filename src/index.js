@@ -10,6 +10,7 @@ export {
   currentUser as user,
   loginStatus,
   accessToken,
+  global,
   signInWithGoogle,
   signInWithGithub,
   signInWithFacebook,
