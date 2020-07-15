@@ -43,8 +43,8 @@ resolve({
   <!-- Here you have access to firebase object -->
   <!-- prop: firebaseConfig -->
   <!-- prop: endpoint, hasura graphql endpoint -->
-  <!-- global: fallback, values for query if mutation variables undefined -->
   <!-- optional prop: queries, object with all queries, mutations and subscriptions -->
+  <!-- optional prop: global, fallback values for query variables if variable undefined -->
   <!-- optional prop: analytics, firebase analytics -->
   <!-- optional prop: perf, firebase performence -->
   <!-- optional prop: schema, value which will replace %s in queries with itself -->
