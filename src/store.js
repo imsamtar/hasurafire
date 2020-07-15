@@ -9,6 +9,7 @@ export const currentUser = writable(0);
 export const accessToken = writable("");
 export const hasuraEndpoint = writable("");
 export const queries = writable({});
+export const global = writable({});
 export default firebase;
 
 function processProvider(provider, scopes, options) {
