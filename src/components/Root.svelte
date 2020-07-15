@@ -16,7 +16,9 @@
   export let schema = "";
   export let analytics = false;
   export let perf = false;
+  /********* compoments ***********/
   export let component = undefined;
+  /********************************/
 
   setContext("__root", true);
   onMount(function() {

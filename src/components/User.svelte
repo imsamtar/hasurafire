@@ -9,9 +9,11 @@
   export let refreshTokenEvery = 1000;
   export let user = undefined;
   export let auth = undefined;
+  /********* compoments ***********/
   export let pending = undefined;
   export let component = undefined;
   export let out = undefined;
+  /********************************/
   export let fresh_signin = false;
   export let signout = signOut;
   signout = signOut;
