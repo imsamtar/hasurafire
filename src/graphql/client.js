@@ -9,11 +9,16 @@ function shouldStop(headers = {}) {
   return (!readStore(hasuraEndpoint) || !readStore(accessToken)) && headers['Authorization'];
 }
 
+function getURI(protocol = "https") {
+  return readStore(hasuraEndpoint)
+    .replace(/^((\w*:)?\/\/)?/, `${protocol}://`);
+}
+
 const graphql = {
   httpClient(headers = {}) {
     if (shouldStop(headers)) return 0;
     const link = new HttpLink({
-      uri: readStore(hasuraEndpoint),
+      uri: getURI(),
       headers
     });
     return new ApolloClient({
@@ -24,16 +29,17 @@ const graphql = {
   wsClient(headers = {}) {
     if (shouldStop(headers)) return 0;
     const link = new WebSocketLink({
-      uri: `ws://${readStore(hasuraEndpoint).split("//").splice(-1)[0]}`,
+      uri: getURI('wss'),
       options: {
         reconnect: true,
+        lazy: true,
         connectionParams: {
           headers
         },
       },
     });
-    link.subscriptionClient.maxConnectTimeGenerator.duration = () =>
-      link.subscriptionClient.maxConnectTimeGenerator.max;
+    // To avoid `failed: WebSocket is closed before the connection is established.` warning in console
+    link.subscriptionClient.maxConnectTimeGenerator.setMin(3000);
     return [
       new ApolloClient({
         link,
