@@ -16,7 +16,7 @@
         "hasura"
     ],
     "author": "SAMEER TARIQ",
-    "license": "ISC",
+    "license": "MIT",
     "bugs": {
         "url": "https://github.com/imsamtar/hasurafire/issues"
     },
