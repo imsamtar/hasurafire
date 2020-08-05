@@ -1,42 +1,42 @@
 {
-  "name": "hasurafire",
-  "version": "0.0.9-13",
-  "description": "A svelte components library for firebase-auth and hasura",
-  "main": "src/index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/imsamtar/hasurafire.git"
-  },
-  "keywords": [
-    "svelte",
-    "firebase-auth",
-    "hasura"
-  ],
-  "author": "SAMEER TARIQ",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/imsamtar/hasurafire/issues"
-  },
-  "homepage": "https://github.com/imsamtar/hasurafire#readme",
-  "dependencies": {
-    "@firebase/analytics": "^0.3.0",
-    "@firebase/app": "^0.6.0",
-    "@firebase/auth": "^0.14.4",
-    "@firebase/performance": "^0.2.36",
-    "apollo-cache-inmemory": "^1.6.5",
-    "apollo-client": "^2.6.8",
-    "apollo-link-http": "^1.5.16",
-    "apollo-link-ws": "^1.0.19",
-    "bufferutil": "^4.0.1",
-    "graphql": "^14.0.0",
-    "graphql-tag": "^2.10.3",
-    "subscriptions-transport-ws": "^0.9.16",
-    "utf-8-validate": "^5.0.2"
-  },
-  "files": [
-    "src"
-  ]
+    "name": "hasurafire",
+    "version": "0.0.9-14",
+    "description": "A svelte components library for firebase-auth and hasura",
+    "main": "src/index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/imsamtar/hasurafire.git"
+    },
+    "keywords": [
+        "svelte",
+        "firebase-auth",
+        "hasura"
+    ],
+    "author": "SAMEER TARIQ",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/imsamtar/hasurafire/issues"
+    },
+    "homepage": "https://github.com/imsamtar/hasurafire#readme",
+    "dependencies": {
+        "@firebase/analytics": "^0.3.0",
+        "@firebase/app": "^0.6.0",
+        "@firebase/auth": "^0.14.4",
+        "@firebase/performance": "^0.2.36",
+        "apollo-cache-inmemory": "^1.6.5",
+        "apollo-client": "^2.6.8",
+        "apollo-link-http": "^1.5.16",
+        "apollo-link-ws": "^1.0.19",
+        "bufferutil": "^4.0.1",
+        "graphql": "^14.0.0",
+        "graphql-tag": "^2.10.3",
+        "subscriptions-transport-ws": "^0.9.16",
+        "utf-8-validate": "^5.0.2"
+    },
+    "files": [
+        "src"
+    ]
 }
