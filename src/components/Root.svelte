@@ -2,8 +2,8 @@
   import { onMount, setContext } from "svelte";
   import firebase from "@firebase/app";
   import "@firebase/auth";
-  import "@firebase/performance";
-  import "@firebase/analytics";
+  // import "@firebase/performance";
+  // import "@firebase/analytics";
   import { performance } from "../store";
   import { hasuraEndpoint } from "../store";
   import { firebase as _firebase } from "../store";
