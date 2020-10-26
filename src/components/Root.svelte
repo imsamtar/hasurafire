@@ -1,6 +1,6 @@
 <script>
   import { onMount, setContext } from "svelte";
-  import firebase from "@firebase/app";
+  import { firebase } from "@firebase/app";
   import "@firebase/auth";
   // import "@firebase/performance";
   // import "@firebase/analytics";
