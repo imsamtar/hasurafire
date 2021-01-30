@@ -1,23 +1,23 @@
-export { default as Root }
-from "./components/Root.svelte";
-export { default as User }
-from "./components/User.svelte";
-export { default as SaveUser }
-from "./components/SaveUser.svelte";
-export { default as Query }
-from "./components/Query.svelte";
-export { default as Mutate }
-from "./components/Mutate.svelte";
-export { default as Subscribe }
-from "./components/Subscribe.svelte";
-export { query, mutate, subscribe }
-from "./graphql";
+import Root from "./components/Root.svelte";
+import User from "./components/User.svelte";
+import SaveUser from "./components/SaveUser.svelte";
+import Query from "./components/Query.svelte";
+import Mutate from "./components/Mutate.svelte";
+import Subscribe from "./components/Subscribe.svelte";
+import { query, mutate, subscribe } from "./graphql/index.js";
+
 export {
-    default as firebase,
+    firebase,
     currentUser as user,
     loginStatus,
     accessToken,
     global,
+    hasuraEndpoint,
+    queries,
+    performance,
+    signUp,
+    signIn,
+    signOut,
     signInWithGoogle,
     signInWithGithub,
     signInWithFacebook,
@@ -28,7 +28,22 @@ export {
     signInWithFacebookRedirect,
     signInWithTwitterRedirect,
     signInWithOAuthRedirect,
-    signInWithEmailAndPassword,
-    signOut
+    verifyEmail,
+    updateProfile,
+    updateEmail,
+    updatePassword,
+    resetPassword,
+    deleteAccount,
+} from "./store.js";
+
+export {
+    Root,
+    User,
+    SaveUser,
+    Query,
+    Mutate,
+    Subscribe,
+    query,
+    mutate,
+    subscribe
 }
-from "./store";

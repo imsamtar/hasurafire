@@ -1,8 +1,9 @@
 {
     "name": "hasurafire",
-    "version": "0.0.9-17",
+    "version": "0.1.0",
     "description": "A svelte components library for firebase-auth and hasura",
     "main": "src/index.js",
+    "type": "module",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
     },
@@ -12,7 +13,8 @@
     },
     "keywords": [
         "svelte",
-        "firebase-auth",
+        "firebase",
+        "authentication",
         "hasura"
     ],
     "author": "SAMEER TARIQ",

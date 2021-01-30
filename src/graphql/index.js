@@ -1,7 +1,7 @@
-import {get } from "svelte/store";
+import { get } from "svelte/store";
 import gql from "graphql-tag";
 import client from "./client";
-import { queries, global } from "../store";
+import { queries, global } from "../store.js";
 
 function stringQuery(query, type) {
     if (typeof query == "string") {
@@ -30,7 +30,7 @@ function vars(query, vars) {
                     variables[match[1]] = get(global)[match[1]];
             });
     }
-    return {...variables, ...vars };
+    return { ...variables, ...vars };
 }
 
 export const query = (query, variables = {}, options = {}) => {

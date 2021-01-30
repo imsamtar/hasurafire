@@ -1,10 +1,9 @@
 <script>
-  import { onMount, createEventDispatcher } from "svelte";
+  import { createEventDispatcher } from "svelte";
   import { setContext, getContext } from "svelte";
   import { firebase, currentUser } from "../store";
   import { loginStatus, accessToken } from "../store";
   import { signOut } from "../store";
-  import { onInterval } from "../utils";
 
   export let refreshTokenEvery = 1000;
   export let user = undefined;
@@ -27,12 +26,12 @@
   function initialize() {
     let interval;
     let firstTime = true;
-    $firebase.auth().onAuthStateChanged(async function(user) {
+    $firebase.auth().onAuthStateChanged(async function (user) {
       if (user) {
         $accessToken = await user.getIdToken(true);
         $currentUser = user;
 
-        interval = setInterval(async function() {
+        interval = setInterval(async function () {
           $accessToken = await user.getIdToken(true);
         }, refreshTokenEvery * 1000);
 
@@ -69,7 +68,13 @@
   {#if $loginStatus == 1}
     <!-- if signed in -->
     {#if component}
-      <svelte:component this={component} {user} {auth} {fresh_signin} {signout} />
+      <svelte:component
+        this={component}
+        {user}
+        {auth}
+        {fresh_signin}
+        {signout}
+      />
     {:else}
       <slot {user} {auth} {fresh_signin} {signout} />
     {/if}

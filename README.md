@@ -1,10 +1,10 @@
-## Hasurafire
+# hasurafire
 
-A svelte components library for firebase-auth and hasura
+### Collection of svelte components for firebase authentication and hasura
 
 ## Setup
 
-```
+```bash
 npm i -D hasurafire
 ```
 
@@ -16,7 +16,11 @@ resolve({
 }),
 ```
 
-## Root
+
+## API
+---
+
+### Root Component
 
 ```html
 <script>
@@ -52,8 +56,9 @@ resolve({
     <!-- component -->
 </Root>
 ```
+---
 
-## User
+### User Component
 
 ```html
 <script>
@@ -86,8 +91,9 @@ resolve({
     <!-- out -->
 </User>
 ```
+---
 
-## SaveUser
+### SaveUser Component
 
 ```html
 <script>
@@ -126,8 +132,9 @@ resolve({
   {/if}
 </User>
 ```
+---
 
-## Query
+### Query Component
 
 ```html
 <script>
@@ -166,8 +173,9 @@ resolve({
     <!-- alt -->
 </Query>
 ```
+---
 
-## Mutate
+### Mutate Component
 
 ```html
 <script>
@@ -206,8 +214,9 @@ resolve({
     <!-- alt -->
 </Mutate>
 ```
+---
 
-## Subscribe
+### Subscribe Component
 
 ```html
 <script>
@@ -240,8 +249,7 @@ resolve({
     <!-- alt -->
 </Subscribe>
 ```
-
-## Other things exported by hasurafire
+---
 
 ### query:
 
@@ -252,6 +260,7 @@ resolve({
   - options (optional) e.g. { role, headers, noauth, adminsecret }
 - Returns
   - graphql query response
+---
 
 ### mutate:
 
@@ -262,6 +271,7 @@ resolve({
   - options (optional) e.g. { role, headers, noauth, adminsecret }
 - Returns
   - graphql mutatation response
+---
 
 ### subscribe:
 
@@ -276,74 +286,131 @@ resolve({
       - qraphql subscription observable
     - client
       - client.close() function to disconnect this websocket connection
+---
 
 ### firebase
 
 - svelte store for firebase object
+---
 
 ### user
 
 - firebase current user
+---
 
 ### loginStatus
 
 - -1 if signed out
 - 0 if not sure (pending)
 - 1 if signed in
+---
 
 ### accessToken
 
 - JWT access token of currently signed-in user
+---
 
 ### global
 
 - fallback values for query, mutation and subscription variables
+---
 
 ### signInWithGoogle
 
 - call this function to signin with popup with google
+---
 
 ### signInWithGithub
 
 - call this function to signin with popup with github
+---
 
 ### signInWithFacebook
 
 - call this function to signin with popup with facebook
+---
 
 ### signInWithTwitter
 
 - call this function to signin with popup with twitter
+---
 
 ### signInWithOAuth
 
 - call this function to signin with popup with 0Auth
+---
 
 ### signInWithGoogleRedirect
 
 - call this function to signin with redirect with google
+---
 
 ### signInWithGithubRedirect
 
 - call this function to signin with redirect with github
+---
 
 ### signInWithFacebookRedirect
 
 - call this function to signin with redirect with facebook
+---
 
 ### signInWithTwitterRedirect
 
 - call this function to signin with redirect with twitter
+---
 
 ### signInWithOAuthRedirect
 
 - call this function to signin with redirect with 0Auth
+---
 
-### signInWithEmailAndPassword
+### signIn
 
 - call this function to signin with email and password
-- accepts email and password as arguments
+- accepts email and password
+---
+
+### verifyEmail
+
+- call this function to send verification email to user
+---
+
+### updateProfile
+
+- call this function to update user's profile
+- accepts an object
+```javascript
+{
+  displayName: "", // optional
+  photoURL: "" // optional
+}
+```
+---
+
+### updateEmail
+
+- call this function to update user's email
+- accepts email
+---
+
+### updatePassword
+
+- call this function to update user's password
+- accepts password
+---
+
+### resetPassword
+
+- call this function to send password reset email to user
+---
 
 ### signOut
 
 - call this function to signout
+---
+
+### deleteAccount
+
+- call this function to delete user's account
+---

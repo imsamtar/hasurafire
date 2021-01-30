@@ -2,8 +2,8 @@ import { HttpLink } from "apollo-link-http";
 import { WebSocketLink } from "apollo-link-ws";
 import ApolloClient from "apollo-client";
 import { InMemoryCache } from "apollo-cache-inmemory";
-import { hasuraEndpoint, accessToken } from "../store";
-import { readStore } from "../utils";
+import { hasuraEndpoint, accessToken } from "../store.js";
+import { readStore } from "../utils.js";
 
 function shouldStop(headers = {}) {
     return (!readStore(hasuraEndpoint) || !readStore(accessToken)) && headers['Authorization'];
