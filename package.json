@@ -1,5 +1,5 @@
 {
-    "name": "hasurafire",
+    "name": "authfire",
     "version": "0.1.0",
     "description": "Collection of svelte components for firebase authentication and hasura",
     "main": "src/index.js",
